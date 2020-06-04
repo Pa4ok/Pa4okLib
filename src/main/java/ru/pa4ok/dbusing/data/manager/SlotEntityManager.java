@@ -1,5 +1,6 @@
 package ru.pa4ok.dbusing.data.manager;
 
+import ru.pa4ok.dbusing.data.BaseManager;
 import ru.pa4ok.dbusing.data.Database;
 import ru.pa4ok.dbusing.data.entity.SlotEntity;
 
@@ -7,37 +8,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SlotEntityManager
+public class SlotEntityManager extends BaseManager
 {
     private static final String SLOTS_TABLE = "slots";
 
-    private final Database database;
-
     public SlotEntityManager(Database database)
     {
-        this.database = database;
+        super(database);
     }
 
     public int createSlotTable() throws SQLException
     {
-        try(Connection c = database.getConnection())
-        {
-            String sql = "CREATE TABLE IF NOT EXISTS " + SLOTS_TABLE + " (id INT(64) NOT NULL AUTO_INCREMENT, title VARCHAR(45), price INT(64), PRIMARY KEY(id));";
-            Statement s = c.createStatement();
-
-            return s.executeUpdate(sql);
-        }
+        return this.createTable(SLOTS_TABLE, "id INT(64) NOT NULL AUTO_INCREMENT, title VARCHAR(45), price INT(64), PRIMARY KEY(id)");
     }
 
     public int deleteSlotTable() throws SQLException
     {
-        try(Connection c = database.getConnection())
-        {
-            String sql = "DROP TABLE IF EXISTS " + SLOTS_TABLE + ";";
-            Statement s = c.createStatement();
-
-            return s.executeUpdate(sql);
-        }
+        return this.deleteTable(SLOTS_TABLE);
     }
 
     public SlotEntity addSlot(SlotEntity slot) throws SQLException
