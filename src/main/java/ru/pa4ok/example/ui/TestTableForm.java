@@ -29,7 +29,7 @@ public class TestTableForm extends BaseForm
 
         tableModel = new EditableTableModel<SlotEntity>(table) {
             @Override
-            public void getTableHeaders(List headers) {
+            public void getTableHeaders(List<TableHeaderContainer> headers) {
                 headers.add(new TableHeaderContainer("id", false));
                 headers.add(new TableHeaderContainer("title"));
                 headers.add(new TableHeaderContainer("price", DataFilter.positiveIntFilter));

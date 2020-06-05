@@ -34,4 +34,18 @@ public class DialogUtil
     {
         showInfo(null, text);
     }
+
+    public static boolean showConfirm(Component parentComponent, String text)
+    {
+        int result = JOptionPane.showOptionDialog(parentComponent, text, "Подтверждение", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Подтверждение", "Отмена"}, "Подтверждение");
+
+        if (result == JOptionPane.YES_OPTION) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean showConfirm(String text) {
+        return showConfirm(null, text);
+    }
 }
