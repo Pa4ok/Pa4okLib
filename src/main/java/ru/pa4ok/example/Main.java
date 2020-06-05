@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class Main
 {
     private static Main instance;
-    
+
     private final MysqlDatabase database = new MysqlDatabase("nleontnr.beget.tech", "nleontnr_exam", "nleontnr_exam", "yOCqf4MyOCqf", 3306);
 
     public Main()
