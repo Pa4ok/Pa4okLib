@@ -1,4 +1,4 @@
-package ru.pa4ok.dbusing.data;
+package ru.pa4ok.library.data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -6,9 +6,9 @@ import java.sql.Statement;
 
 public abstract class BaseManager
 {
-    protected final Database database;
+    protected final MysqlDatabase database;
 
-    public BaseManager(Database database)
+    public BaseManager(MysqlDatabase database)
     {
         this.database = database;
     }
@@ -35,7 +35,7 @@ public abstract class BaseManager
         }
     }
 
-    public Database getDatabase() {
+    public MysqlDatabase getDatabase() {
         return database;
     }
 }

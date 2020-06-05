@@ -1,4 +1,4 @@
-package ru.pa4ok.dbusing.data.entity;
+package ru.pa4ok.example.data.entity;
 
 public class SlotEntity
 {

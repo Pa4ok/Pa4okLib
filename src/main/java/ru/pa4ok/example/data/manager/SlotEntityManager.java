@@ -1,8 +1,8 @@
-package ru.pa4ok.dbusing.data.manager;
+package ru.pa4ok.example.data.manager;
 
-import ru.pa4ok.dbusing.data.BaseManager;
-import ru.pa4ok.dbusing.data.Database;
-import ru.pa4ok.dbusing.data.entity.SlotEntity;
+import ru.pa4ok.library.data.BaseManager;
+import ru.pa4ok.library.data.MysqlDatabase;
+import ru.pa4ok.example.data.entity.SlotEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class SlotEntityManager extends BaseManager
 {
     private static final String SLOTS_TABLE = "slots";
 
-    public SlotEntityManager(Database database)
+    public SlotEntityManager(MysqlDatabase database)
     {
         super(database);
     }

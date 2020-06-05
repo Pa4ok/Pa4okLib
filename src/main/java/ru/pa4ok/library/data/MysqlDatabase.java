@@ -1,4 +1,4 @@
-package ru.pa4ok.dbusing.data;
+package ru.pa4ok.library.data;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class Database
+public class MysqlDatabase
 {
     private final String serverName;
     private final String dbName;
@@ -16,7 +16,7 @@ public class Database
 
     private DataSource source;
 
-    public Database(String serverName, String dbName, String user, String pass, int port)
+    public MysqlDatabase(String serverName, String dbName, String user, String pass, int port)
     {
         this.serverName = serverName;
         this.dbName = dbName;
