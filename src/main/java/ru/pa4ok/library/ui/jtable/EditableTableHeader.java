@@ -5,13 +5,13 @@ import ru.pa4ok.library.util.DataFilter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TableHeaderContainer
+public class EditableTableHeader
 {
     private Object header;
     private boolean editable;
     private DataFilter<String> filter;
 
-    public TableHeaderContainer(Object header, boolean editable, DataFilter<String> filter) {
+    public EditableTableHeader(Object header, boolean editable, DataFilter<String> filter) {
         this.header = header;
         this.editable = editable;
         if(filter == null) {
@@ -21,15 +21,15 @@ public class TableHeaderContainer
         }
     }
 
-    public TableHeaderContainer(Object header, DataFilter<String> filter) {
+    public EditableTableHeader(Object header, DataFilter<String> filter) {
         this(header, true, filter);
     }
 
-    public TableHeaderContainer(Object header, boolean editable) {
+    public EditableTableHeader(Object header, boolean editable) {
         this(header, editable, null);
     }
 
-    public TableHeaderContainer(Object header) {
+    public EditableTableHeader(Object header) {
         this(header, null);
     }
 

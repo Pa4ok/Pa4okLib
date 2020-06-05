@@ -6,7 +6,7 @@ import ru.pa4ok.example.data.manager.SlotEntityManager;
 import ru.pa4ok.library.ui.dialog.DialogUtil;
 import ru.pa4ok.library.ui.form.BaseForm;
 import ru.pa4ok.library.ui.jtable.EditableTableModel;
-import ru.pa4ok.library.ui.jtable.TableHeaderContainer;
+import ru.pa4ok.library.ui.jtable.EditableTableHeader;
 import ru.pa4ok.library.util.DataFilter;
 
 import javax.swing.JPanel;
@@ -29,10 +29,10 @@ public class TestTableForm extends BaseForm
 
         tableModel = new EditableTableModel<SlotEntity>(table) {
             @Override
-            public void getTableHeaders(List<TableHeaderContainer> headers) {
-                headers.add(new TableHeaderContainer("id", false));
-                headers.add(new TableHeaderContainer("title"));
-                headers.add(new TableHeaderContainer("price", DataFilter.positiveIntFilter));
+            public void getTableHeaders(List<EditableTableHeader> headers) {
+                headers.add(new EditableTableHeader("id", false));
+                headers.add(new EditableTableHeader("title"));
+                headers.add(new EditableTableHeader("price", DataFilter.positiveIntFilter));
             }
 
             @Override

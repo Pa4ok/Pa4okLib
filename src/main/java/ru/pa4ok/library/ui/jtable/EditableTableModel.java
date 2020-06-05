@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class EditableTableModel<T> extends DataTableModel<T>
 {
-    protected final List<TableHeaderContainer> headers = new ArrayList<>();
+    protected final List<EditableTableHeader> headers = new ArrayList<>();
     protected boolean enableChangeEvent = true;
 
     public EditableTableModel(JTable tableInstanceIn)
@@ -16,7 +16,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
         super(tableInstanceIn);
 
         getTableHeaders(this.headers);
-        for(TableHeaderContainer header : this.headers) {
+        for(EditableTableHeader header : this.headers) {
             addColumn(header.getHeader());
         }
 
@@ -47,7 +47,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
         });
     }
 
-    public abstract void getTableHeaders(List<TableHeaderContainer> headers);
+    public abstract void getTableHeaders(List<EditableTableHeader> headers);
 
     public abstract void onTableChangeEvent(int row, T object);
 
@@ -98,7 +98,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     }
 
 
-    public List<TableHeaderContainer> getHeaders() {
+    public List<EditableTableHeader> getHeaders() {
         return headers;
     }
 
