@@ -1,5 +1,6 @@
 package ru.pa4ok.example;
 
+import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
 import ru.pa4ok.example.data.manager.SlotEntityManager;
 
@@ -18,7 +19,8 @@ public class Main
 {
     private static Main instance;
 
-    private final MysqlDatabase database = new MysqlDatabase("228.228.228.228", "db_name", "db_user", "db_user_pass", 3306);
+    //private final MysqlDatabase database = new MysqlDatabase("228.228.228.228", "db_name", "db_user", "db_user_pass", 3306);
+    private final MysqlDatabase database = new MysqlDatabase("nleontnr.beget.tech", "nleontnr_exam", "nleontnr_exam", "yOCqf4MyOCqf", 3306);
 
     public Main()
     {
@@ -39,6 +41,8 @@ public class Main
         }
         //никаких закрытый, открытий и восстановлений соединения делать не нужно
         //все делается за вас НОРМАЛЬНЫМИ средствами
+
+        (new TestTableForm()).setVisible(true);
     }
 
     public MysqlDatabase getDatabase() {

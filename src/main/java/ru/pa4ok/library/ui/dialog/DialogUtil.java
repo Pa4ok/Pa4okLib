@@ -5,32 +5,32 @@ import java.awt.Component;
 
 public class DialogUtil
 {
-    protected void showError(Component parentComponent, String text)
+    public static void showError(Component parentComponent, String text)
     {
         JOptionPane.showMessageDialog(parentComponent, text, " Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
-    protected void showError(String text)
+    public static void showError(String text)
     {
         showError(null, text);
     }
 
-    protected void showWarn(Component parentComponent, String text)
+    public static void showWarn(Component parentComponent, String text)
     {
         JOptionPane.showMessageDialog(parentComponent, text, " Предупреждение", JOptionPane.WARNING_MESSAGE);
     }
 
-    protected void showWarn(String text)
+    public static void showWarn(String text)
     {
         showWarn(null, text);
     }
 
-    protected void showInfo(Component parentComponent, String text)
+    public static void showInfo(Component parentComponent, String text)
     {
         JOptionPane.showMessageDialog(parentComponent, text, " Информация", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    protected void showInfo(String text)
+    public static void showInfo(String text)
     {
         showInfo(null, text);
     }

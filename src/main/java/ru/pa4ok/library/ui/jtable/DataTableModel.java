@@ -35,6 +35,13 @@ public abstract class DataTableModel<T> extends DefaultTableModel
         return  data;
     }
 
+    protected void setRowData(int row, Object[] columns)
+    {
+        for(int i=0; i<getColumnCount(); i++) {
+            setValueAt(columns[i], row, i);
+        }
+    }
+
     public T getRowObject(int row)
     {
         return getObjectFromData(getRowData(row));
@@ -54,15 +61,15 @@ public abstract class DataTableModel<T> extends DefaultTableModel
     }
 
     @Override
-    public void addRow(Object[] rowData) {
-        super.addRow(rowData);
-        this.tableContent.add(getObjectFromData(rowData));
-    }
-
-    @Override
     public void removeRow(int row) {
         super.removeRow(row);
         this.tableContent.remove(row);
+    }
+
+    public void setRow(int row, T object)
+    {
+        setRowData(row, getRowDataFromObject(object));
+        this.tableContent.set(row, object);
     }
 
     public void clearTableContent()

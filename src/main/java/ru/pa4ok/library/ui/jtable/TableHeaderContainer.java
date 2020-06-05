@@ -1,5 +1,7 @@
 package ru.pa4ok.library.ui.jtable;
 
+import ru.pa4ok.library.util.DataFilter;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -7,24 +9,20 @@ public class TableHeaderContainer
 {
     private Object header;
     private boolean editable;
+    private DataFilter<String> filter;
 
-    private KeyAdapter keyFilter = new KeyAdapter() {
-        @Override
-        public void keyReleased(KeyEvent e) {
-            //default - allow all
-        }
-    };
-
-    public TableHeaderContainer(Object header, boolean editable, KeyAdapter keyFilter) {
+    public TableHeaderContainer(Object header, boolean editable, DataFilter<String> filter) {
         this.header = header;
         this.editable = editable;
-        if(keyFilter != null) {
-            this.keyFilter = keyFilter;
+        if(filter == null) {
+            this.filter = DataFilter.allowFilter;
+        } else {
+            this.filter = filter;
         }
     }
 
-    public TableHeaderContainer(Object header, KeyAdapter keyFilter) {
-        this(header, true, keyFilter);
+    public TableHeaderContainer(Object header, DataFilter<String> filter) {
+        this(header, true, filter);
     }
 
     public TableHeaderContainer(Object header, boolean editable) {
@@ -65,11 +63,11 @@ public class TableHeaderContainer
         this.editable = editable;
     }
 
-    public KeyAdapter getKeyFilter() {
-        return keyFilter;
+    public DataFilter<String> getFilter() {
+        return filter;
     }
 
-    public void setKeyFilter(KeyAdapter keyFilter) {
-        this.keyFilter = keyFilter;
+    public void setFilter(DataFilter<String> filter) {
+        this.filter = filter;
     }
 }
