@@ -1,4 +1,4 @@
-package ru.pa4ok.library.ui.util;
+package ru.pa4ok.library.ui.dialog;
 
 import javax.swing.JOptionPane;
 import java.awt.Component;
