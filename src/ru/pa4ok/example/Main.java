@@ -6,6 +6,11 @@ import ru.pa4ok.example.data.manager.SlotEntityManager;
 import ru.pa4ok.library.ui.dialog.DialogUtil;
 
 import javax.swing.JFrame;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -45,6 +50,12 @@ public class Main
 
         TestTableForm form = new TestTableForm();
         form.setVisible(true);
+
+        try {
+            Font.createFont(Font.TRUETYPE_FONT, this.getClass().getClassLoader().getResourceAsStream("lobster.ttf"));
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
