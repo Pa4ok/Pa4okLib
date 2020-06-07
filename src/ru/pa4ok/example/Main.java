@@ -3,14 +3,9 @@ package ru.pa4ok.example;
 import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
 import ru.pa4ok.example.data.manager.SlotEntityManager;
-import ru.pa4ok.library.ui.dialog.DialogUtil;
+import ru.pa4ok.library.ui.form.BaseForm;
 
-import javax.swing.JFrame;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 
 /**
@@ -48,15 +43,17 @@ public class Main
         //никаких закрытый, открытий и восстановлений соединения делать не нужно
         //все делается за вас НОРМАЛЬНЫМИ средствами
 
-        TestTableForm form = new TestTableForm();
-        form.setVisible(true);
+        BaseForm.setBaseApplicationIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("icon.jpg")));
 
+        /* тест шрифтов
         try {
             Font.createFont(Font.TRUETYPE_FONT, this.getClass().getClassLoader().getResourceAsStream("lobster.ttf"));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
+        TestTableForm form = new TestTableForm();
+        form.setVisible(true);
     }
 
     public MysqlDatabase getDatabase() {

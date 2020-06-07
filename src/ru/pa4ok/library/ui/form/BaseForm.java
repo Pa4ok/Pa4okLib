@@ -10,14 +10,15 @@ import java.io.IOException;
 public abstract class BaseForm extends JFrame
 {
     private static final String APPLICATION_BASE_TITLE = "Base application title";
+    private static Image baseApplicationIcon = null;
 
     public BaseForm()
     {
         setResizable(false);
         setTitle(getFormTitle());
-
-        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("icon.jpg")));
-
+        if(baseApplicationIcon != null) {
+            setIconImage(baseApplicationIcon);
+        }
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(getFormWidth(), getFormHeight()));
         setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getFormWidth() / 2, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getFormHeight() / 2);
@@ -35,5 +36,13 @@ public abstract class BaseForm extends JFrame
 
     public String getFormTitle() {
         return APPLICATION_BASE_TITLE;
+    }
+
+    public static void setBaseApplicationIcon(Image image) {
+        baseApplicationIcon = image;
+    }
+
+    public static Image getBaseApplicationIcon() {
+        return baseApplicationIcon;
     }
 }

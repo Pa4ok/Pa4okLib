@@ -12,6 +12,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1cxNCSB4yYyXeoowQ6mdZhXGHNn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,30 +53,34 @@
     <configuration />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591466494806">
+    <state x="724" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591471579005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591466494806" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1591467218175">
+    <state x="724" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591471579005" />
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591533526702">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591467218175" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1591467218174">
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591533526702" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1591483327603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591467218174" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1591467218174">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591483327603" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1591483327603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591467218174" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1591467218174">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591483327603" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1591483327603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591467218174" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1591466540615">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591483327603" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1591483327603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591466540615" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591483327603" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1591533536218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591533536218" />
     <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591466348076">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
