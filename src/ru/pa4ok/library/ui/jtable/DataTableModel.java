@@ -15,6 +15,7 @@ public abstract class DataTableModel<T> extends DefaultTableModel
     {
         this.tableInstance = tableInstance;
         this.tableInstance.getTableHeader().setReorderingAllowed(false);
+        initTableHeaders();
     }
 
     @Override
@@ -22,9 +23,18 @@ public abstract class DataTableModel<T> extends DefaultTableModel
         return false;
     }
 
+    protected abstract Object[] getTableHeaders();
+
     protected abstract T getObjectFromData(Object[] data);
 
     protected abstract String[] getRowDataFromObject(T obj);
+
+    protected void initTableHeaders()
+    {
+        for(Object o : this.getTableHeaders()) {
+            addColumn(o);
+        }
+    }
 
     protected Object[] getRowData(int row)
     {

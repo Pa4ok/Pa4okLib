@@ -1,5 +1,6 @@
 package ru.pa4ok.example;
 
+import ru.pa4ok.example.ui.TestForm;
 import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
 import ru.pa4ok.example.data.manager.SlotEntityManager;
