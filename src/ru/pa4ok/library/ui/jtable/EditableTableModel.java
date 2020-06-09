@@ -1,8 +1,12 @@
 package ru.pa4ok.library.ui.jtable;
 
+import ru.pa4ok.library.ui.dialog.DialogUtil;
+
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,23 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
                 onTableChangeEvent(row, newObject);
             }
         });
+
+        tableInstance.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_DELETE) {
+                    int selectedRow = tableInstance.getSelectedRow();
+                    if(DialogUtil.showConfirm("Вы точно хотите удалить этот объект, '" + getRowObject(selectedRow) + "'?"))
+                    {
+                        T object = getRowObject(selectedRow);
+                        tableInstance.removeEditor();
+                        tableInstance.clearSelection();
+                        removeRow(selectedRow, false);
+                        onTableRemoveRowEvent(object);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -60,6 +81,8 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
 
     protected abstract void onTableChangeEvent(int row, T object);
 
+    protected abstract void onTableRemoveRowEvent(T object);
+
     @Override
     public boolean isCellEditable(int row, int column) {
         if(column >= headers.size()) {
@@ -72,8 +95,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     public void addRow(T object, boolean doChangeEvent)
     {
         enableChangeEvent = doChangeEvent;
-        addRow(getRowDataFromObject(object));
-        this.tableContent.add(object);
+        super.addRow(object);
         enableChangeEvent = true;
     }
 
@@ -100,7 +122,6 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     public void removeRow(int row, boolean doChangeEvent) {
         enableChangeEvent = doChangeEvent;
         super.removeRow(row);
-        this.tableContent.remove(row);
         enableChangeEvent = true;
     }
 
@@ -112,8 +133,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     public void setRow(int row, T object, boolean doChangeEvent)
     {
         enableChangeEvent = doChangeEvent;
-        setRowData(row, getRowDataFromObject(object));
-        this.tableContent.set(row, object);
+        super.setRow(row, object);
         enableChangeEvent = true;
     }
 
@@ -125,11 +145,9 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
 
     public void clearTableContent(boolean doChangeEvent)
     {
-        int count = getRowCount();
-        for (int i = count - 1; i >= 0; i--) {
-            removeRow(i, doChangeEvent);
-        }
-        this.tableContent.clear();
+        enableChangeEvent = doChangeEvent;
+        super.clearTableContent();
+        enableChangeEvent = true;
     }
 
     @Override

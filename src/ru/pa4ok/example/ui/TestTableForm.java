@@ -36,12 +36,6 @@ public class TestTableForm extends BaseForm
             }
 
             @Override
-            public void onTableChangeEvent(int row, SlotEntity object) {
-                //тут должна быть синхронизация с базой данных и тд
-                System.out.println(row + " " + object);
-            }
-
-            @Override
             public SlotEntity getObjectFromData(Object[] data) {
                 return new SlotEntity(Integer.parseInt((String)data[0]), (String)data[1], Integer.parseInt((String)data[2]));
             }
@@ -49,6 +43,18 @@ public class TestTableForm extends BaseForm
             @Override
             public String[] getRowDataFromObject(SlotEntity obj) {
                 return new String[] { String.valueOf(obj.getId()), obj.getTitle(), String.valueOf(obj.getPrice()) };
+            }
+
+            @Override
+            public void onTableChangeEvent(int row, SlotEntity object) {
+                //тут должна быть синхронизация с базой данных и тд
+                System.out.println("Change event " + row + " " + object);
+            }
+
+            @Override
+            protected void onTableRemoveRowEvent(SlotEntity object) {
+                //тут должна быть синхронизация с базой данных и тд
+                System.out.println("Delete event " + object);
             }
         };
 
