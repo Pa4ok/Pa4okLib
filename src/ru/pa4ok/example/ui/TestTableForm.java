@@ -55,7 +55,7 @@ public class TestTableForm extends BaseForm
         table.setModel(tableModel);
 
         try {
-            tableModel.hideAddRows(slotManager.getAllSlots());
+            tableModel.addRows(slotManager.getAllSlots(), false);
         } catch (SQLException e) {
             e.printStackTrace();
             DialogUtil.showError("Ошибка при получении данных из бд!");

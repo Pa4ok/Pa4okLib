@@ -69,43 +69,74 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
         return headers.get(column).isEditable();
     }
 
-    public void hideAddRow(T object)
+    public void addRow(T object, boolean doChangeEvent)
     {
-        this.enableChangeEvent = false;
-        addRow(object);
-        this.enableChangeEvent = true;
+        enableChangeEvent = doChangeEvent;
+        addRow(getRowDataFromObject(object));
+        this.tableContent.add(object);
+        enableChangeEvent = true;
     }
 
-    public void hideAddRows(List<T> objects)
+    @Override
+    public void addRow(T object) {
+        addRow(object, true);
+    }
+
+    public void addRows(List<T> objects, boolean doChangeEvent)
     {
         for(T object : objects) {
-            hideAddRow(object);
+            addRow(object, doChangeEvent);
         }
     }
 
-    public void hideAddRow(Object[] rowData) {
-        this.enableChangeEvent = false;
-        super.addRow(rowData);
-        this.tableContent.add(getObjectFromData(rowData));
-        this.enableChangeEvent = true;
+    @Override
+    public void addRows(List<T> objects)
+    {
+        for(T object : objects) {
+            addRow(object, true);
+        }
     }
 
-    public void hideRemoveRow(int row) {
-        this.enableChangeEvent = false;
+    public void removeRow(int row, boolean doChangeEvent) {
+        enableChangeEvent = doChangeEvent;
         super.removeRow(row);
         this.tableContent.remove(row);
-        this.enableChangeEvent = true;
+        enableChangeEvent = true;
     }
 
-    public void hideClearTableContent()
+    @Override
+    public void removeRow(int row) {
+        removeRow(row, true);
+    }
+
+    public void setRow(int row, T object, boolean doChangeEvent)
+    {
+        enableChangeEvent = doChangeEvent;
+        setRowData(row, getRowDataFromObject(object));
+        this.tableContent.set(row, object);
+        enableChangeEvent = true;
+    }
+
+    @Override
+    public void setRow(int row, T object)
+    {
+        setRow(row, object, true);
+    }
+
+    public void clearTableContent(boolean doChangeEvent)
     {
         int count = getRowCount();
         for (int i = count - 1; i >= 0; i--) {
-            hideRemoveRow(i);
+            removeRow(i, doChangeEvent);
         }
         this.tableContent.clear();
     }
 
+    @Override
+    public void clearTableContent()
+    {
+        clearTableContent(true);
+    }
 
     public List<EditableTableHeader> getHeaders() {
         return headers;
