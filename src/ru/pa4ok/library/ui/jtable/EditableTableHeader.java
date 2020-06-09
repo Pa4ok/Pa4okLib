@@ -14,11 +14,7 @@ public class EditableTableHeader
     public EditableTableHeader(Object header, boolean editable, DataFilter<String> filter) {
         this.header = header;
         this.editable = editable;
-        if(filter == null) {
-            this.filter = DataFilter.allowFilter;
-        } else {
-            this.filter = filter;
-        }
+        this.filter = filter;
     }
 
     public EditableTableHeader(Object header, DataFilter<String> filter) {
@@ -26,25 +22,11 @@ public class EditableTableHeader
     }
 
     public EditableTableHeader(Object header, boolean editable) {
-        this(header, editable, null);
+        this(header, editable, DataFilter.allowFilter);
     }
 
     public EditableTableHeader(Object header) {
-        this(header, null);
-    }
-
-    public static KeyAdapter getIntegerOnlyFilter()
-    {
-        return new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                char ch = e.getKeyChar();
-
-                if(ch < '0' || ch > '9') {
-                    e.consume();
-                }
-            }
-        };
+        this(header, DataFilter.allowFilter);
     }
 
     public Object getHeader() {

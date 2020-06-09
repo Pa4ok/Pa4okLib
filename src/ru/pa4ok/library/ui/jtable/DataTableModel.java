@@ -11,10 +11,10 @@ public abstract class DataTableModel<T> extends DefaultTableModel
 
     protected final List<T> tableContent = new ArrayList<>();
 
-    public DataTableModel(JTable tableInstanceIn)
+    public DataTableModel(JTable tableInstance)
     {
-        this.tableInstance = tableInstanceIn;
-        tableInstance.getTableHeader().setReorderingAllowed(false);
+        this.tableInstance = tableInstance;
+        this.tableInstance.getTableHeader().setReorderingAllowed(false);
     }
 
     @Override
