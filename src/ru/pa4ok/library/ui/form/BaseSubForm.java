@@ -25,6 +25,15 @@ public abstract class BaseSubForm extends BaseForm
     public void closeSubForm()
     {
         mainForm.setEnabled(true);
+        mainForm.setFocusable(true);
         dispose();
+    }
+
+    public void openSubForm()
+    {
+        mainForm.setEnabled(false);
+        mainForm.setFocusable(false);
+        setVisible(true);
+        setFocusable(true);
     }
 }

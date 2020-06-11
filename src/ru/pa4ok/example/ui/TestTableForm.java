@@ -3,7 +3,7 @@ package ru.pa4ok.example.ui;
 import ru.pa4ok.example.Main;
 import ru.pa4ok.example.data.entity.SlotEntity;
 import ru.pa4ok.example.data.manager.SlotEntityManager;
-import ru.pa4ok.library.ui.dialog.DialogUtil;
+import ru.pa4ok.library.ui.DialogUtil;
 import ru.pa4ok.library.ui.form.BaseForm;
 import ru.pa4ok.library.ui.jtable.EditableTableModel;
 import ru.pa4ok.library.ui.jtable.EditableTableHeader;
@@ -30,7 +30,7 @@ public class TestTableForm extends BaseForm
         tableModel = new EditableTableModel<SlotEntity>(table) {
             @Override
             public void getTableHeaders(List<EditableTableHeader> headers) {
-                headers.add(new EditableTableHeader("id", false));
+                headers.add(new EditableTableHeader("id", true, false));
                 headers.add(new EditableTableHeader("title"));
                 headers.add(new EditableTableHeader("price", DataFilter.positiveIntFilter));
             }

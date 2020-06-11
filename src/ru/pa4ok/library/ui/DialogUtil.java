@@ -1,4 +1,4 @@
-package ru.pa4ok.library.ui.dialog;
+package ru.pa4ok.library.ui;
 
 import javax.swing.JOptionPane;
 import java.awt.Component;
@@ -37,7 +37,7 @@ public class DialogUtil
 
     public static boolean showConfirm(Component parentComponent, String text)
     {
-        int result = JOptionPane.showOptionDialog(parentComponent, text, "Подтверждение", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Подтверждение", "Отмена"}, "Подтверждение");
+        int result = JOptionPane.showOptionDialog(parentComponent, text, " Подтверждение", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Подтверждение", "Отмена"}, "Подтверждение");
 
         if (result == JOptionPane.YES_OPTION) {
             return true;

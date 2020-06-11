@@ -1,6 +1,6 @@
 package ru.pa4ok.library.ui.jtable;
 
-import ru.pa4ok.library.ui.dialog.DialogUtil;
+import ru.pa4ok.library.ui.DialogUtil;
 
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
