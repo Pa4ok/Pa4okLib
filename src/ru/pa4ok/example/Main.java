@@ -1,6 +1,7 @@
 package ru.pa4ok.example;
 
 import ru.pa4ok.example.data.entity.SlotEntity;
+import ru.pa4ok.example.ui.AddSlotForm;
 import ru.pa4ok.example.ui.TestForm;
 import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
@@ -55,7 +56,7 @@ public class Main
             e.printStackTrace();
         }*/
 
-        TestTableForm form = new TestTableForm();
+        AddSlotForm form = new AddSlotForm();
         form.setVisible(true);
     }
 

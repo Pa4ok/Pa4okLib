@@ -101,22 +101,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591891476779" />
-    <state width="1899" height="211" key="GridCell.Tab.0.bottom" timestamp="1591986699193">
+    <state width="1899" height="68" key="GridCell.Tab.0.bottom" timestamp="1591987928029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591986699193" />
-    <state width="1899" height="211" key="GridCell.Tab.0.center" timestamp="1591986699192">
+    <state width="1899" height="68" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591987928029" />
+    <state width="1899" height="68" key="GridCell.Tab.0.center" timestamp="1591987928029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591986699192" />
-    <state width="1899" height="211" key="GridCell.Tab.0.left" timestamp="1591986699192">
+    <state width="1899" height="68" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591987928029" />
+    <state width="1899" height="68" key="GridCell.Tab.0.left" timestamp="1591987928029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591986699192" />
-    <state width="1899" height="211" key="GridCell.Tab.0.right" timestamp="1591986699192">
+    <state width="1899" height="68" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591987928029" />
+    <state width="1899" height="68" key="GridCell.Tab.0.right" timestamp="1591987928029">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="211" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591986699192" />
+    <state width="1899" height="68" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591987928029" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1591916230961">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -125,5 +125,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040@0.0.1920.1040" timestamp="1591466348076" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://C:/Program Files/Java/jdk1.8.0_231/src.zip!/java/awt/event/ActionListener.java</url>
+          <line>49</line>
+          <properties class="java.awt.event.ActionListener" method="actionPerformed">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
