@@ -51,7 +51,7 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
             public void keyReleased(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_DELETE) {
                     int selectedRow = tableInstance.getSelectedRow();
-                    if(DialogUtil.showConfirm("Вы точно хотите удалить этот объект, '" + getRowObject(selectedRow) + "'?"))
+                    if(DialogUtil.showConfirm("Вы точно хотите удалить этот объект?"))
                     {
                         T object = getRowObject(selectedRow);
                         tableInstance.removeEditor();
@@ -83,6 +83,8 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     protected abstract void onTableChangeEvent(int row, T object);
 
     protected abstract void onTableRemoveRowEvent(T object);
+
+    protected abstract T onTableCreateEntryEvent(String[] values);
 
     @Override
     public boolean isCellEditable(int row, int column) {
@@ -171,6 +173,14 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
             enableChangeEvent = false;
             addRow(getRowDataFromObject(o));
             enableChangeEvent = true;
+        }
+    }
+
+    public void showCreateEntryForm()
+    {
+        T object = onTableCreateEntryEvent(CreateTableEntryForm.createTableEntryData(this.headers));
+        if(object != null) {
+            addRow(object, false);
         }
     }
 

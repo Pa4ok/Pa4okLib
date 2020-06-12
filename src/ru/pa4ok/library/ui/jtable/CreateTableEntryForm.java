@@ -50,7 +50,6 @@ public class CreateTableEntryForm
                 if(result == null) {
                     return null;
                 }
-                System.out.println(i + " " + result);
 
                 if(header.getFilter().filter(result)) {
                     entryData[i] = result;
@@ -63,7 +62,7 @@ public class CreateTableEntryForm
         return entryData;
     }
 
-    public static Object[] createTableEntryData(List<EditableTableHeader> tableHeadersIn)
+    public static String[] createTableEntryData(List<EditableTableHeader> tableHeadersIn)
     {
         return createTableEntryData(null, tableHeadersIn);
     }

@@ -15,6 +15,8 @@ import javax.swing.JTable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,13 +26,15 @@ public class TestTableForm extends BaseForm
     private JTable table;
     private JButton sortButton1;
     private JButton sortButton2;
+    private JButton addButton;
 
+    private final TestTableForm instance;
     private EditableTableModel<SlotEntity> tableModel;
-
     private SlotEntityManager slotManager = new SlotEntityManager(Main.getInstance().getDatabase());
 
     public TestTableForm()
     {
+        instance = this;
         setContentPane(mainPanel);
 
         tableModel = new EditableTableModel<SlotEntity>(table) {
@@ -53,14 +57,37 @@ public class TestTableForm extends BaseForm
 
             @Override
             public void onTableChangeEvent(int row, SlotEntity object) {
-                //тут должна быть синхронизация с базой данных и тд
                 System.out.println("Change event " + row + " " + object);
+                try {
+                    slotManager.updateSlot(object);
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                    DialogUtil.showError(instance, "Ошибка подключения к бд при редактировании записи");
+                }
             }
 
             @Override
             protected void onTableRemoveRowEvent(SlotEntity object) {
-                //тут должна быть синхронизация с базой данных и тд
                 System.out.println("Delete event " + object);
+                try {
+                    slotManager.deleteSlotById(object.getId());
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                    DialogUtil.showError(instance, "Ошибка подключения к бд при удалении записи");
+                }
+            }
+
+            @Override
+            protected SlotEntity onTableCreateEntryEvent(String[] values) {
+                System.out.println("Create event " + Arrays.asList(values).toString());
+                try {
+                    SlotEntity object = new SlotEntity(values[0], Integer.parseInt(values[1]));
+                    return slotManager.addSlot(object);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    DialogUtil.showError(instance, "Ошибка подключения к бд при добавлении новой записи");
+                    return null;
+                }
             }
         };
         table.setModel(tableModel);
@@ -89,6 +116,13 @@ public class TestTableForm extends BaseForm
                         return o1.getPrice() > o2.getPrice() ? 1 : -1;
                     }
                 });
+            }
+        });
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.showCreateEntryForm();
             }
         });
 
