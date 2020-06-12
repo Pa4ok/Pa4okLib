@@ -20,16 +20,6 @@ import java.util.List;
 
 public class TestTableForm extends BaseForm
 {
-    private static final Comparator<SlotEntity> byPrice = new Comparator<SlotEntity>() {
-        @Override
-        public int compare(SlotEntity o1, SlotEntity o2) {
-            if(o1.getPrice() == o2.getPrice()) {
-                return 0;
-            }
-            return o1.getPrice() > o2.getPrice() ? 1 : -1;
-        }
-    };
-
     private JPanel mainPanel;
     private JTable table;
     private JButton sortButton1;
@@ -81,10 +71,7 @@ public class TestTableForm extends BaseForm
                 tableModel.sortTable(new Comparator<SlotEntity>() {
                     @Override
                     public int compare(SlotEntity o1, SlotEntity o2) {
-                        if(o1.getPrice() == o2.getPrice()) {
-                            return 0;
-                        }
-                        return o1.getPrice() > o2.getPrice() ? 1 : -1;
+                        return o1.getTitle().compareTo(o2.getTitle());
                     }
                 });
             }
@@ -99,7 +86,7 @@ public class TestTableForm extends BaseForm
                         if(o1.getPrice() == o2.getPrice()) {
                             return 0;
                         }
-                        return o1.getPrice() < o2.getPrice() ? 1 : -1;
+                        return o1.getPrice() > o2.getPrice() ? 1 : -1;
                     }
                 });
             }
