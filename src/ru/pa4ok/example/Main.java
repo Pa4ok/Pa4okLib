@@ -1,5 +1,6 @@
 package ru.pa4ok.example;
 
+import ru.pa4ok.example.data.entity.SlotEntity;
 import ru.pa4ok.example.ui.TestForm;
 import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
@@ -8,6 +9,7 @@ import ru.pa4ok.library.ui.form.BaseForm;
 
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.Random;
 
 /**
  * Тут я показываю адекватную с точки зрения используемых средств работу и

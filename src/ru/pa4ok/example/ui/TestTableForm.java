@@ -9,6 +9,7 @@ import ru.pa4ok.library.ui.jtable.EditableTableModel;
 import ru.pa4ok.library.ui.jtable.EditableTableHeader;
 import ru.pa4ok.library.util.DataFilter;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ public class TestTableForm extends BaseForm
 {
     private JPanel mainPanel;
     private JTable table;
+    private JButton button1;
 
     private EditableTableModel<SlotEntity> tableModel;
 
