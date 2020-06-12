@@ -12,14 +12,28 @@ import ru.pa4ok.library.util.DataFilter;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 public class TestTableForm extends BaseForm
 {
+    private static final Comparator<SlotEntity> byPrice = new Comparator<SlotEntity>() {
+        @Override
+        public int compare(SlotEntity o1, SlotEntity o2) {
+            if(o1.getPrice() == o2.getPrice()) {
+                return 0;
+            }
+            return o1.getPrice() > o2.getPrice() ? 1 : -1;
+        }
+    };
+
     private JPanel mainPanel;
     private JTable table;
-    private JButton button1;
+    private JButton sortButton1;
+    private JButton sortButton2;
 
     private EditableTableModel<SlotEntity> tableModel;
 
@@ -59,8 +73,37 @@ public class TestTableForm extends BaseForm
                 System.out.println("Delete event " + object);
             }
         };
-
         table.setModel(tableModel);
+
+        sortButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.sortTable(new Comparator<SlotEntity>() {
+                    @Override
+                    public int compare(SlotEntity o1, SlotEntity o2) {
+                        if(o1.getPrice() == o2.getPrice()) {
+                            return 0;
+                        }
+                        return o1.getPrice() > o2.getPrice() ? 1 : -1;
+                    }
+                });
+            }
+        });
+
+        sortButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.sortTable(new Comparator<SlotEntity>() {
+                    @Override
+                    public int compare(SlotEntity o1, SlotEntity o2) {
+                        if(o1.getPrice() == o2.getPrice()) {
+                            return 0;
+                        }
+                        return o1.getPrice() < o2.getPrice() ? 1 : -1;
+                    }
+                });
+            }
+        });
 
         try {
             tableModel.addRows(slotManager.getAllSlots(), false);

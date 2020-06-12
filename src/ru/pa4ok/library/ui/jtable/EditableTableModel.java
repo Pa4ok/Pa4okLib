@@ -5,6 +5,7 @@ import ru.pa4ok.library.ui.DialogUtil;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -154,6 +155,23 @@ public abstract class EditableTableModel<T> extends DataTableModel<T>
     public void clearTableContent()
     {
         clearTableContent(true);
+    }
+
+    @Override
+    public void refillTableFromList()
+    {
+        for (int i = getRowCount() - 1; i >= 0; i--) {
+            dataVector.removeElementAt(i);
+            enableChangeEvent = false;
+            fireTableRowsDeleted(i, i);
+            enableChangeEvent = true;
+        }
+
+        for(T o : this.tableContent) {
+            enableChangeEvent = false;
+            addRow(getRowDataFromObject(o));
+            enableChangeEvent = true;
+        }
     }
 
     public List<EditableTableHeader> getHeaders() {

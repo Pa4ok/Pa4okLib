@@ -3,6 +3,8 @@ package ru.pa4ok.library.ui.jtable;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class DataTableModel<T> extends DefaultTableModel
@@ -84,11 +86,26 @@ public abstract class DataTableModel<T> extends DefaultTableModel
 
     public void clearTableContent()
     {
-        int count = getRowCount();
-        for (int i = count - 1; i >= 0; i--) {
+        for (int i = getRowCount() - 1; i >= 0; i--) {
             removeRow(i);
         }
         this.tableContent.clear();
+    }
+
+    public void refillTableFromList()
+    {
+        for (int i = getRowCount() - 1; i >= 0; i--) {
+            super.removeRow(i);
+        }
+
+        for(T o : this.tableContent) {
+            addRow(getRowDataFromObject(o));
+        }
+    }
+
+    public void sortTable(Comparator<T> sorter) {
+        Collections.sort(tableContent, sorter);
+        refillTableFromList();
     }
 
     public JTable getTableInstance() {
