@@ -2,9 +2,6 @@ package ru.pa4ok.library.ui.jtable;
 
 import ru.pa4ok.library.util.DataFilter;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class EditableTableHeader
 {
     private String header;

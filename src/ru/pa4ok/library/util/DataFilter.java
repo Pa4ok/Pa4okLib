@@ -1,5 +1,7 @@
 package ru.pa4ok.library.util;
 
+import javax.xml.crypto.Data;
+
 public interface DataFilter<T>
 {
     public boolean filter(T s);
@@ -56,15 +58,45 @@ public interface DataFilter<T>
         }
     };
 
-    public static final DataFilter<String> floatFilter = new DataFilter<String>() {
+    public static final DataFilter<String> positiveDoubleFilter = new DataFilter<String>() {
         @Override
         public boolean filter(String s) {
             try {
-                Float.parseFloat(s);
+                if(Double.parseDouble(s) < 0) {
+                    return false;
+                }
                 return true;
             } catch (NumberFormatException e) {
                 return false;
             }
         }
     };
+
+    public static final DataFilter<String> booleanFilter = new DataFilter<String>() {
+        @Override
+        public boolean filter(String s) {
+            try {
+                if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
+                    return true;
+                }
+                return false;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    };
+
+    public static DataFilter<String> getBoundStringFilter(int max)
+    {
+        return new DataFilter<String>() {
+            @Override
+            public boolean filter(String s) {
+                if(s.length() > max) {
+                    return false;
+                }
+                return true;
+            }
+        };
+    }
+
 }

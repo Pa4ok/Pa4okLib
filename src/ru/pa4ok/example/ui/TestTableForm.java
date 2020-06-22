@@ -1,146 +1,319 @@
 package ru.pa4ok.example.ui;
 
+
 import ru.pa4ok.example.Main;
-import ru.pa4ok.example.data.entity.SlotEntity;
-import ru.pa4ok.example.data.manager.SlotEntityManager;
+import ru.pa4ok.example.data.entity.ProductEntity;
+import ru.pa4ok.example.data.manager.ProductEntityManager;
 import ru.pa4ok.library.ui.DialogUtil;
 import ru.pa4ok.library.ui.form.BaseForm;
-import ru.pa4ok.library.ui.jtable.EditableTableModel;
 import ru.pa4ok.library.ui.jtable.EditableTableHeader;
+import ru.pa4ok.library.ui.jtable.EditableTableModel;
 import ru.pa4ok.library.util.DataFilter;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+    Класс главного окна приложения
+ */
 public class TestTableForm extends BaseForm
 {
+    private final TestTableForm instance;
+
     private JPanel mainPanel;
     private JTable table;
-    private JButton sortButton1;
-    private JButton sortButton2;
+    private JButton sort1Button;
+    private JButton sort2Button;
+    private JButton refreshButton;
+    private JComboBox searchComboBox;
     private JButton addButton;
+    private JLabel maxRowCountField;
+    private JLabel currentRowCountField;
+    private JButton helpButton;
+    private JButton exitButton;
 
-    private final TestTableForm instance;
-    private EditableTableModel<SlotEntity> tableModel;
-    private SlotEntityManager slotManager = new SlotEntityManager(Main.getInstance().getDatabase());
+    private ProductEntityManager entityManager = new ProductEntityManager(Main.getInstance().getDatabase());
+    private EditableTableModel<ProductEntity> editableTableModel;
+    private List<String> manufacturers = new ArrayList<>();
 
     public TestTableForm()
     {
         instance = this;
         setContentPane(mainPanel);
 
-        tableModel = new EditableTableModel<SlotEntity>(table) {
+        initTable();
+        initSortElements();
+        initButtons();
+
+        refillTable();
+        initSearchElements();
+
+        setVisible(true);
+    }
+
+    private void initTable()
+    {
+        editableTableModel = new EditableTableModel<ProductEntity>(table)
+        {
             @Override
-            public void getTableHeaders(List<EditableTableHeader> headers) {
-                headers.add(new EditableTableHeader("id", true, false));
-                headers.add(new EditableTableHeader("title"));
-                headers.add(new EditableTableHeader("price", DataFilter.positiveIntFilter));
+            protected void getTableHeaders(List<EditableTableHeader> headers)
+            {
+                headers.add(new EditableTableHeader("ID", true, false));
+                headers.add(new EditableTableHeader("Название", DataFilter.getBoundStringFilter(99)));
+                headers.add(new EditableTableHeader("Цена", DataFilter.positiveDoubleFilter));
+                headers.add(new EditableTableHeader("Описание", DataFilter.getBoundStringFilter(1024)));
+                headers.add(new EditableTableHeader("Путь до изображения", DataFilter.getBoundStringFilter(999)));
+                headers.add(new EditableTableHeader("Активен?", DataFilter.booleanFilter));
+                headers.add(new EditableTableHeader("Производитель", DataFilter.getBoundStringFilter(99)));
             }
 
             @Override
-            public SlotEntity getObjectFromData(Object[] data) {
-                return new SlotEntity(Integer.parseInt((String)data[0]), (String)data[1], Integer.parseInt((String)data[2]));
-            }
-
-            @Override
-            public String[] getRowDataFromObject(SlotEntity obj) {
-                return new String[] { String.valueOf(obj.getId()), obj.getTitle(), String.valueOf(obj.getPrice()) };
-            }
-
-            @Override
-            public void onTableChangeEvent(int row, SlotEntity object) {
-                System.out.println("Change event " + row + " " + object);
+            protected void onTableChangeEvent(int row, ProductEntity object) {
+                System.out.println("Change event " + object);
                 try {
-                    slotManager.updateSlot(object);
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
-                    DialogUtil.showError(instance, "Ошибка подключения к бд при редактировании записи");
+                    entityManager.update(object);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    DialogUtil.showError("Ошибка при изменении записи в базе данных");
                 }
             }
 
             @Override
-            protected void onTableRemoveRowEvent(SlotEntity object) {
-                System.out.println("Delete event " + object);
+            protected void onTableRemoveRowEvent(ProductEntity object) {
+                System.out.println("Remove event " + object);
                 try {
-                    slotManager.deleteSlotById(object.getId());
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
-                    DialogUtil.showError(instance, "Ошибка подключения к бд при удалении записи");
+                    entityManager.deleteById(object.getId());
+                    updateRowCountFields();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    DialogUtil.showError("Ошибка при удалении записи из базы данных");
                 }
             }
 
             @Override
-            protected SlotEntity onTableCreateEntryEvent(String[] values) {
-                System.out.println("Create event " + Arrays.asList(values).toString());
+            protected ProductEntity onTableCreateEntryEvent(String[] values)
+            {
                 try {
-                    SlotEntity object = new SlotEntity(values[0], Integer.parseInt(values[1]));
-                    return slotManager.addSlot(object);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                    DialogUtil.showError(instance, "Ошибка подключения к бд при добавлении новой записи");
+                    ProductEntity newEntity = entityManager.add(new ProductEntity(
+                            -1,
+                            values[0],
+                            Double.parseDouble(values[1]),
+                            values[2],
+                            values[3],
+                            Boolean.parseBoolean(values[4]) ? 1 : 0,
+                            values[5]
+                    ));
+                    System.out.println("Create event " + newEntity);
+                    return newEntity;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    DialogUtil.showError("Ошибка при добавлении новой записи в базу данных");
                     return null;
                 }
             }
+
+            @Override
+            protected ProductEntity getObjectFromData(String[] data) {
+                return new ProductEntity(
+                        Integer.parseInt(data[0]),
+                        data[1],
+                        Double.parseDouble(data[2]),
+                        data[3],
+                        data[4],
+                        Boolean.parseBoolean(data[5]) ? 1 : 0,
+                        data[6]
+                );
+            }
+
+            @Override
+            protected String[] getRowDataFromObject(ProductEntity obj) {
+                return new String[] {
+                        String.valueOf(obj.getId()),
+                        obj.getTitle(),
+                        String.valueOf(obj.getCost()),
+                        obj.getDescription() == null ? "Описание товара" : obj.getDescription(),
+                        obj.getImgPath(),
+                        String.valueOf(obj.isActive()),
+                        obj.getManufacturer()
+                };
+            }
+
+            @Override
+            public void showCreateEntryForm() {
+                super.showCreateEntryForm();
+                updateRowCountFields();
+            }
         };
-        table.setModel(tableModel);
+        table.setModel(editableTableModel);
 
-        sortButton1.addActionListener(new ActionListener() {
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+            {
+                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                ProductEntity product = editableTableModel.getRowObject(row);
+                c.setBackground(product.isActive() ?  Color.WHITE : Color.LIGHT_GRAY);
+                return c;
+            }
+        });
+    }
+
+    private void initSortElements()
+    {
+        sort1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.sortTable(new Comparator<SlotEntity>() {
+                editableTableModel.sortTable(new Comparator<ProductEntity>() {
                     @Override
-                    public int compare(SlotEntity o1, SlotEntity o2) {
-                        return o1.getTitle().compareTo(o2.getTitle());
+                    public int compare(ProductEntity o1, ProductEntity o2) {
+                        return Double.compare(o1.getCost(), o2.getCost());
                     }
                 });
             }
         });
 
-        sortButton2.addActionListener(new ActionListener() {
+        sort2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.sortTable(new Comparator<SlotEntity>() {
+                editableTableModel.sortTable(new Comparator<ProductEntity>() {
                     @Override
-                    public int compare(SlotEntity o1, SlotEntity o2) {
-                        if(o1.getPrice() == o2.getPrice()) {
-                            return 0;
-                        }
-                        return o1.getPrice() > o2.getPrice() ? 1 : -1;
+                    public int compare(ProductEntity o1, ProductEntity o2) {
+                        return Double.compare(o2.getCost(), o1.getCost());
                     }
                 });
             }
         });
 
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refillTable();
+                refillSearchComboBox();;
+            }
+        });
+    }
+
+    private void initSearchElements()
+    {
+        refillSearchComboBox();
+
+        searchComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                refillTable();
+            }
+        });
+    }
+
+    private void refillSearchComboBox()
+    {
+        searchComboBox.removeAllItems();
+        manufacturers.clear();
+
+        searchComboBox.addItem("Выберите производителя");
+        for(ProductEntity e : editableTableModel.getTableContent()) {
+            if(!manufacturers.contains(e.getManufacturer())) {
+                searchComboBox.addItem(e.getManufacturer());
+                manufacturers.add(e.getManufacturer());
+            }
+        }
+    }
+
+    private void updateCurrentField()
+    {
+        currentRowCountField.setText(String.valueOf(editableTableModel.getTableContent().size()));
+    }
+
+    private void updateMaxField(int max)
+    {
+        maxRowCountField.setText(String.valueOf(max));
+    }
+
+    private void updateMaxField()
+    {
+        try {
+            maxRowCountField.setText(String.valueOf(entityManager.getAll().size()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DialogUtil.showError("Ошибка при получении товаров из базы данных");
+            maxRowCountField.setText("[ERROR]");
+        }
+
+    }
+
+    private void updateRowCountFields()
+    {
+        updateCurrentField();
+        updateMaxField();
+    }
+
+    private void initButtons()
+    {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tableModel.showCreateEntryForm();
+                editableTableModel.showCreateEntryForm();
             }
         });
 
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogUtil.showInfo(instance, "Связаться с разработчиком можно по эл.почте - student17@exam.com");
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(DialogUtil.showConfirm("Вы точно хотите выйти из приложения?")) {
+                    dispose();
+                }
+            }
+        });
+    }
+
+    private void refillTable()
+    {
         try {
-            tableModel.addRows(slotManager.getAllSlots(), false);
+            List<ProductEntity> entities = entityManager.getAll();
+            updateMaxField(entities.size());
+            if(searchComboBox.getSelectedItem() != null && searchComboBox.getSelectedIndex() != 0)
+            {
+                for(int i=entities.size()-1; i>=0; i--)
+                {
+                    ProductEntity e = entities.get(i);
+                    if(!((String)searchComboBox.getSelectedItem()).equals(e.getManufacturer())) {
+                        entities.remove(i);
+                    }
+                }
+            }
+            editableTableModel.clearTableContent(false);
+            editableTableModel.addRows(entities, false);
+            updateCurrentField();
+
         } catch (SQLException e) {
             e.printStackTrace();
-            DialogUtil.showError("Ошибка при получении данных из бд!");
+            DialogUtil.showError("Ошибка при получении товаров из базы данных");
         }
     }
 
     @Override
     public int getFormWidth() {
-        return 400;
+        return 700;
     }
 
     @Override
     public int getFormHeight() {
-        return 325;
+        return 650;
     }
 }

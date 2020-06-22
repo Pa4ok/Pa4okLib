@@ -7,13 +7,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class DataTableModel<T> extends DefaultTableModel
+public abstract class ObjectTableModel<T> extends DefaultTableModel
 {
     protected final JTable tableInstance;
 
     protected final List<T> tableContent = new ArrayList<>();
 
-    public DataTableModel(JTable tableInstance)
+    public ObjectTableModel(JTable tableInstance)
     {
         this.tableInstance = tableInstance;
         this.tableInstance.getTableHeader().setReorderingAllowed(false);
@@ -27,9 +27,9 @@ public abstract class DataTableModel<T> extends DefaultTableModel
 
     protected abstract Object[] getTableHeaders();
 
-    protected abstract T getObjectFromData(Object[] data);
+    protected abstract T getObjectFromData(String[] rowData);
 
-    protected abstract String[] getRowDataFromObject(T obj);
+    protected abstract String[] getRowDataFromObject(T entity);
 
     protected void initTableHeaders()
     {
@@ -38,19 +38,19 @@ public abstract class DataTableModel<T> extends DefaultTableModel
         }
     }
 
-    protected Object[] getRowData(int row)
+    protected String[] getRowData(int row)
     {
-        Object[] data = new Object[getColumnCount()];
+        String[] data = new String[getColumnCount()];
         for(int i = 0; i< getColumnCount(); i++) {
-            data[i] = getValueAt(row, i);
+            data[i] = String.valueOf(getValueAt(row, i));
         }
-        return  data;
+        return data;
     }
 
-    protected void setRowData(int row, Object[] columns)
+    protected void setRowData(int row, Object[] rowData)
     {
         for(int i=0; i<getColumnCount(); i++) {
-            setValueAt(columns[i], row, i);
+            setValueAt(rowData[i], row, i);
         }
     }
 
@@ -59,10 +59,10 @@ public abstract class DataTableModel<T> extends DefaultTableModel
         return getObjectFromData(getRowData(row));
     }
 
-    public void addRow(T object)
+    public void addRow(T entity)
     {
-        addRow(getRowDataFromObject(object));
-        this.tableContent.add(object);
+        addRow(getRowDataFromObject(entity));
+        this.tableContent.add(entity);
     }
 
     public void addRows(List<T> objects)
@@ -78,10 +78,10 @@ public abstract class DataTableModel<T> extends DefaultTableModel
         this.tableContent.remove(row);
     }
 
-    public void setRow(int row, T object)
+    public void setRow(int row, T entity)
     {
-        setRowData(row, getRowDataFromObject(object));
-        this.tableContent.set(row, object);
+        setRowData(row, getRowDataFromObject(entity));
+        this.tableContent.set(row, entity);
     }
 
     public void clearTableContent()
