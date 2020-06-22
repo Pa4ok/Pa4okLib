@@ -1,7 +1,7 @@
 package ru.pa4ok.example.ui;
 
 
-import ru.pa4ok.example.Main;
+import ru.pa4ok.example.Application;
 import ru.pa4ok.example.data.entity.ProductEntity;
 import ru.pa4ok.example.data.manager.ProductEntityManager;
 import ru.pa4ok.library.ui.DialogUtil;
@@ -41,7 +41,7 @@ public class TestTableForm extends BaseForm
     private JButton helpButton;
     private JButton exitButton;
 
-    private ProductEntityManager entityManager = new ProductEntityManager(Main.getInstance().getDatabase());
+    private ProductEntityManager entityManager = new ProductEntityManager(Application.getInstance().getDatabase());
     private EditableTableModel<ProductEntity> editableTableModel;
     private List<String> manufacturers = new ArrayList<>();
 

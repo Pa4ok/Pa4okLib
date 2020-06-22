@@ -9,7 +9,6 @@ import ru.pa4ok.library.util.ResourceUtil;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -18,13 +17,13 @@ import java.sql.SQLException;
  * https://vk.com/myfacekolya
  */
 
-public class Main
+public class Application
 {
-    private static Main instance;
+    private static Application instance;
 
     private MysqlDatabase database;
 
-    public Main()
+    public Application()
     {
         instance = this;
 
@@ -62,12 +61,12 @@ public class Main
         return database;
     }
 
-    public static Main getInstance() {
+    public static Application getInstance() {
         return instance;
     }
 
     public static void main(String[] args)
     {
-        new Main();
+        new Application();
     }
 }

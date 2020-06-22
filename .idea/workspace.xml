@@ -40,15 +40,15 @@
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="CreateTableEntryForm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.library.ui.jtable.CreateTableEntryForm" />
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.example.Application" />
       <module name="Library" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.example.Main" />
+    <configuration name="CreateTableEntryForm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.library.ui.jtable.CreateTableEntryForm" />
       <module name="Library" />
       <method v="2">
         <option name="Make" enabled="true" />
