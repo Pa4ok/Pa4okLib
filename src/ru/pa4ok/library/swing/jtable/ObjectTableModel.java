@@ -1,4 +1,4 @@
-package ru.pa4ok.library.ui.jtable;
+package ru.pa4ok.library.swing.jtable;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

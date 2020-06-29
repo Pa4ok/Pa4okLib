@@ -4,10 +4,10 @@ package ru.pa4ok.example.ui;
 import ru.pa4ok.example.Application;
 import ru.pa4ok.example.data.entity.ProductEntity;
 import ru.pa4ok.example.data.manager.ProductEntityManager;
-import ru.pa4ok.library.ui.DialogUtil;
-import ru.pa4ok.library.ui.form.BaseForm;
-import ru.pa4ok.library.ui.jtable.EditableTableHeader;
-import ru.pa4ok.library.ui.jtable.EditableTableModel;
+import ru.pa4ok.library.swing.DialogUtil;
+import ru.pa4ok.library.swing.form.BaseForm;
+import ru.pa4ok.library.swing.jtable.EditableTableHeader;
+import ru.pa4ok.library.swing.jtable.EditableTableModel;
 import ru.pa4ok.library.util.DataFilter;
 
 import javax.swing.*;

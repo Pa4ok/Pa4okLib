@@ -32,14 +32,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="174" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Test" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.pa4ok.example.Application" />
       <module name="Library" />
@@ -48,7 +48,7 @@
       </method>
     </configuration>
     <configuration name="CreateTableEntryForm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.library.ui.jtable.CreateTableEntryForm" />
+      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.library.swing.jtable.CreateTableEntryForm" />
       <module name="Library" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -63,7 +63,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.CreateTableEntryForm" />
         <item itemvalue="Application.PanelExample" />
       </list>
@@ -93,30 +92,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="701" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591916002536" />
-    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592859618772">
+    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593445041949">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592859618772" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1592225437243">
+    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593445041948" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1593149940530">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592225437243" />
-    <state width="1899" height="157" key="GridCell.Tab.0.bottom" timestamp="1592860128901">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593149940530" />
+    <state width="1899" height="157" key="GridCell.Tab.0.bottom" timestamp="1592861321623">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592860128901" />
-    <state width="1899" height="157" key="GridCell.Tab.0.center" timestamp="1592860128901">
+    <state width="1899" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321623" />
+    <state width="1899" height="157" key="GridCell.Tab.0.center" timestamp="1592861321622">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592860128901" />
-    <state width="1899" height="157" key="GridCell.Tab.0.left" timestamp="1592860128901">
+    <state width="1899" height="157" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
+    <state width="1899" height="157" key="GridCell.Tab.0.left" timestamp="1592861321622">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592860128901" />
-    <state width="1899" height="157" key="GridCell.Tab.0.right" timestamp="1592860128901">
+    <state width="1899" height="157" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
+    <state width="1899" height="157" key="GridCell.Tab.0.right" timestamp="1592861321622">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592860128901" />
+    <state width="1899" height="157" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1591916230961">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

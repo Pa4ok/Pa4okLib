@@ -2,9 +2,9 @@ package ru.pa4ok.example;
 
 import ru.pa4ok.example.ui.TestTableForm;
 import ru.pa4ok.library.data.MysqlDatabase;
-import ru.pa4ok.library.ui.DialogUtil;
-import ru.pa4ok.library.ui.FontUtil;
-import ru.pa4ok.library.ui.form.BaseForm;
+import ru.pa4ok.library.swing.DialogUtil;
+import ru.pa4ok.library.swing.FontUtil;
+import ru.pa4ok.library.swing.form.BaseForm;
 import ru.pa4ok.library.util.ResourceUtil;
 
 import javax.swing.plaf.FontUIResource;
