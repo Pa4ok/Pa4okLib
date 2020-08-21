@@ -15,7 +15,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -25,6 +25,8 @@
       <recent name="ru.pa4ok.library.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\data" />
+      <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\hibernate" />
       <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\javafx" />
     </key>
   </component>
@@ -46,6 +48,22 @@
     <configuration />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1598044910005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598044910005" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1598044910005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598044910005" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1598044910005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598044910005" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1598044910005">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598044910005" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1598044287540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
