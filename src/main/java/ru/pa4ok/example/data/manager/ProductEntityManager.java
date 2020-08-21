@@ -1,8 +1,8 @@
 package ru.pa4ok.example.data.manager;
 
 import ru.pa4ok.example.data.entity.ProductEntity;
-import ru.pa4ok.library.data.BaseManager;
-import ru.pa4ok.library.data.MysqlDatabase;
+import ru.pa4ok.library.data.mysql.BaseManager;
+import ru.pa4ok.library.data.mysql.MysqlDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
 package ru.pa4ok.example;
 
 import ru.pa4ok.example.ui.TestTableForm;
-import ru.pa4ok.library.data.MysqlDatabase;
+import ru.pa4ok.library.data.mysql.MysqlDatabase;
 import ru.pa4ok.library.swing.DialogUtil;
 import ru.pa4ok.library.swing.FontUtil;
 import ru.pa4ok.library.swing.form.BaseForm;

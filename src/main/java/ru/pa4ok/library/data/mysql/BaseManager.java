@@ -1,4 +1,4 @@
-package ru.pa4ok.library.data;
+package ru.pa4ok.library.data.mysql;
 
 import java.sql.Connection;
 import java.sql.SQLException;
