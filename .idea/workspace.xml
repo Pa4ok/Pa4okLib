@@ -1,45 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="Library:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1391be03-fc66-49ce-9e21-7bc404e859f2" name="Default Changelist" comment="" />
+    <list default="true" id="74375865-9121-48ec-94c8-1630ff1d7bd0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectId" id="1cxNCSB4yYyXeoowQ6mdZhXGHNn" />
+  <component name="ProjectId" id="1gQOsuLwtW4spiPTvtxsQ7TcrXD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="174" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Test" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.pa4ok.example.Application" />
       <module name="Library" />
@@ -47,96 +24,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateTableEntryForm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.library.swing.jtable.CreateTableEntryForm" />
-      <module name="Library" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PanelExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.pa4ok.example.ui.PanelExample" />
-      <module name="Library" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CreateTableEntryForm" />
-        <item itemvalue="Application.PanelExample" />
+        <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="552" y="178" width="816" height="729" key="#Intentions" timestamp="1591972054160">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" width="816" height="729" key="#Intentions/0.0.1920.1040@0.0.1920.1040" timestamp="1591972054160" />
-    <state x="724" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591471579005">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="724" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591471579005" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1592859506350">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592859506350" />
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591533526702">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591533526702" />
-    <state x="701" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591916002536">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="701" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591916002536" />
-    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593445041949">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="267" width="540" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593445041948" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1593149940530">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593149940530" />
-    <state width="1899" height="157" key="GridCell.Tab.0.bottom" timestamp="1592861321623">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321623" />
-    <state width="1899" height="157" key="GridCell.Tab.0.center" timestamp="1592861321622">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
-    <state width="1899" height="157" key="GridCell.Tab.0.left" timestamp="1592861321622">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
-    <state width="1899" height="157" key="GridCell.Tab.0.right" timestamp="1592861321622">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="157" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592861321622" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1591916230961">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591916230961" />
-    <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591466348076">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="664" y="411" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040@0.0.1920.1040" timestamp="1591466348076" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>jar://C:/Program Files/Java/jdk1.8.0_231/src.zip!/java/awt/event/ActionListener.java</url>
-          <line>49</line>
-          <properties class="java.awt.event.ActionListener" method="actionPerformed">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

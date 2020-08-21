@@ -12,11 +12,6 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * если кому то нужна помощь с демо экзаменом - пишите мне
- * https://vk.com/myfacekolya
- */
-
 public class Application
 {
     private static Application instance;
