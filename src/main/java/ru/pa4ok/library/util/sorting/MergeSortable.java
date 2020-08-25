@@ -1,6 +1,6 @@
 package ru.pa4ok.library.util.sorting;
 
-public class MergeSortinger implements ISortinger
+public class MergeSortable<E extends Number & Comparable<? super E>> implements ISortable<E>
 {
 	@Override
 	public String getName() 
@@ -9,14 +9,14 @@ public class MergeSortinger implements ISortinger
 	}
 
 	@Override
-	public void sort(int[] array) 
+	public void sort(E[] array)
 	{
 		int left = 0;
 		int right = array.length - 1;
 		mergeSort(array, left, right);
 	}
 	
-	public void mergeSort(int[] array, int left, int right)
+	public void mergeSort(E[] array, int left, int right)
 	{
 		if (right <= left) return;
 	    int mid = (left+right)/2;
@@ -25,12 +25,12 @@ public class MergeSortinger implements ISortinger
 	    merge(array, left, mid, right);
 	}
 	
-	public void merge(int[] array, int left, int mid, int right) 
+	public void merge(E[] array, int left, int mid, int right)
 	{
 	    int lengthLeft = mid - left + 1;
 	    int lengthRight = right - mid;
-	    int leftArray[] = new int [lengthLeft];
-	    int rightArray[] = new int [lengthRight];
+	    E leftArray[] = (E[])new Object[lengthLeft];
+	    E rightArray[] = (E[])new Object[lengthRight];
 
 	    for (int i = 0; i < lengthLeft; i++)
 	    {
@@ -48,7 +48,7 @@ public class MergeSortinger implements ISortinger
 	    {
 	        if (leftIndex < lengthLeft && rightIndex < lengthRight) 
 	        {
-	            if (leftArray[leftIndex] < rightArray[rightIndex]) 
+	            if (leftArray[leftIndex].compareTo(rightArray[rightIndex]) == -1)
 	            {
 	                array[i] = leftArray[leftIndex];
 	                leftIndex++;

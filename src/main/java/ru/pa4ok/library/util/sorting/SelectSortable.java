@@ -1,6 +1,6 @@
 package ru.pa4ok.library.util.sorting;
 
-public class SelectSortinger implements ISortinger
+public class SelectSortable<E extends Number & Comparable<? super E>> implements ISortable<E>
 {
 	@Override
 	public String getName() 
@@ -9,24 +9,23 @@ public class SelectSortinger implements ISortinger
 	}
 
 	@Override
-	public void sort(int[] array) 
+	public void sort(E[] array)
 	{
 		for (int i = 0; i < array.length; i++) 
 		{
-	        int min = array[i];
+	        E min = array[i];
 	        
 	        int minId = i;
 	        for (int j = i+1; j < array.length; j++) 
 	        {
-	            if (array[j] < min) 
+	            if (array[j].compareTo(min) == -1)
 	            {
 	                min = array[j];
 	                minId = j;
 	            }
 	        }
-	        
-	        // ������
-	        int temp = array[i];
+
+	        E temp = array[i];
 	        array[i] = min;
 	        array[minId] = temp;
 	    }

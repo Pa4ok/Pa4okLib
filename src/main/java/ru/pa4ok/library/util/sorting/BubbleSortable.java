@@ -1,18 +1,18 @@
 package ru.pa4ok.library.util.sorting;
 
-public class BubleSortinger implements ISortinger
+public class BubbleSortable<E extends Number & Comparable<? super E>> implements ISortable<E>
 {
 	@Override
 	public String getName() 
 	{
-		return "Buble";
+		return "Bubble";
 	}
 
 	@Override
-	public void sort(int[] array) 
+	public void sort(E[] array)
 	{
 		boolean sorted = false;
-	    int temp;
+	    E temp;
 	    
 	    while(!sorted) 
 	    {
@@ -20,7 +20,7 @@ public class BubleSortinger implements ISortinger
 	        
 	        for (int i = 0; i < array.length - 1; i++) 
 	        {
-	            if (array[i] > array[i+1]) 
+	            if (array[i].compareTo(array[i+1]) == 1)
 	            {
 	                temp = array[i];
 	                array[i] = array[i+1];
