@@ -1,11 +1,9 @@
 package ru.pa4ok.library.data.message;
 
-import ru.pa4ok.app.util.GsonUtil;
+import ru.pa4ok.library.util.GsonUtil;
 
-public class JsonBaseMessage extends BaseMessage
+public class JsonBaseMessage extends GsonUtil.Jsonable
 {
-	private static final long serialVersionUID = 4687047105254848328L;
-	
 	public JsonBaseMessage()
 	{
 		super();

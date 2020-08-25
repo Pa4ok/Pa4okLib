@@ -23,12 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74375865-9121-48ec-94c8-1630ff1d7bd0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx/FxApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx/FxUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx/FxUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx/custom/AcceptOnExitTableCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/javafx/AcceptOnExitTableCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/BaseMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonBaseMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonRequestMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonResponseMessage.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +52,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1gQOsuLwtW4spiPTvtxsQ7TcrXD" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,7 +64,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -72,6 +74,7 @@
       <recent name="ru.pa4ok.library.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\practice\Desktop\Pa4okLib\src\main\java\ru\pa4ok\library\data\message" />
       <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\data" />
       <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\hibernate" />
       <recent name="D:\java\IdeaProjects\Library\src\main\java\ru\pa4ok\library\javafx" />
@@ -102,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598364662397</updated>
-      <workItem from="1598364663667" duration="496000" />
+      <workItem from="1598364663667" duration="609000" />
     </task>
     <servers />
   </component>
