@@ -25,7 +25,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.pa4ok.app.Application</mainClass>
+                            <mainClass>ru.pa4ok.example.Application</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -89,6 +89,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
         </dependency>
 
     </dependencies>

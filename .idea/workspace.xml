@@ -24,10 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="74375865-9121-48ec-94c8-1630ff1d7bd0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/BaseMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonBaseMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonRequestMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message/JsonResponseMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -71,6 +69,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.pa4ok.library.data.http" />
       <recent name="ru.pa4ok.library.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -105,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598364662397</updated>
-      <workItem from="1598364663667" duration="609000" />
+      <workItem from="1598364663667" duration="814000" />
     </task>
     <servers />
   </component>
