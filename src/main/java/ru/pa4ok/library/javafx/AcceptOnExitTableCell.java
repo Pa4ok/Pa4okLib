@@ -1,4 +1,4 @@
-package ru.pa4ok.library.javafx.custom;
+package ru.pa4ok.library.javafx;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

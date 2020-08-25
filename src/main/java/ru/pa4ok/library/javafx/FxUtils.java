@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.pa4ok.app.Application;
 
 import java.awt.Robot;
 import java.io.IOException;
@@ -25,13 +24,13 @@ public class FxUtils
         }
     }
 
-    public static Stage createPopupStage(String title, Parent root)
+    public static Stage createPopupStage(Stage mainStage, String title, Parent root)
     {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(Application.getInstance().getStage());
+        stage.initOwner(mainStage);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("style.css");
