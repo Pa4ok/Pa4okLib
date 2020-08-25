@@ -14,12 +14,12 @@ import java.io.IOException;
 
 //https://coderlessons.com/tutorials/java-tekhnologii/izuchite-apache-http-client/apache-httpclient-kratkoe-rukovodstvo
 
-public class NetworkManager
+public class HttpNetworkManager
 {
 
     private CloseableHttpClient httpClient;
 
-    public NetworkManager()
+    public HttpNetworkManager()
     {
         this.httpClient = HttpClients.createDefault();
     }
