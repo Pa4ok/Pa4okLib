@@ -68,12 +68,12 @@ public class TestTableForm extends BaseForm
             protected void getTableHeaders(List<EditableTableHeader> headers)
             {
                 headers.add(new EditableTableHeader("ID", true, false));
-                headers.add(new EditableTableHeader("Название", DataFilter.getBoundStringFilter(99)));
+                headers.add(new EditableTableHeader("Название", DataFilter.createBoundDoubleFilter(1, 99)));
                 headers.add(new EditableTableHeader("Цена", DataFilter.positiveDoubleFilter));
-                headers.add(new EditableTableHeader("Описание", DataFilter.getBoundStringFilter(1024)));
-                headers.add(new EditableTableHeader("Путь до изображения", DataFilter.getBoundStringFilter(999)));
+                headers.add(new EditableTableHeader("Описание", DataFilter.createBoundDoubleFilter(1, 1024)));
+                headers.add(new EditableTableHeader("Путь до изображения", DataFilter.createBoundDoubleFilter(1, 999)));
                 headers.add(new EditableTableHeader("Активен?", DataFilter.booleanFilter));
-                headers.add(new EditableTableHeader("Производитель", DataFilter.getBoundStringFilter(99)));
+                headers.add(new EditableTableHeader("Производитель", DataFilter.createBoundDoubleFilter(1, 99)));
             }
 
             @Override

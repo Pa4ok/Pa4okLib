@@ -24,8 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="74375865-9121-48ec-94c8-1630ff1d7bd0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/OtherUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/OtherUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/example/ui/TestTableForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/example/ui/TestTableForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/DataFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/DataFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598364662397</updated>
-      <workItem from="1598364663667" duration="893000" />
+      <workItem from="1598364663667" duration="1064000" />
     </task>
     <servers />
   </component>
