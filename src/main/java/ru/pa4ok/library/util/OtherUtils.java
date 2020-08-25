@@ -5,12 +5,6 @@ import java.util.Properties;
 
 public class OtherUtils
 {
-    public static final long MILL_SECOND = 1000L;
-    public static final long MILL_MINUTE = MILL_SECOND * 60;
-    public static final long MILL_HOUR = MILL_MINUTE * 60;
-    public static final long MILL_DAY = MILL_HOUR * 24;
-    public static final long MILL_WEEK = MILL_DAY * 7;
-
     public static void safeSleep(long ms) {
         try {
             Thread.sleep(ms);

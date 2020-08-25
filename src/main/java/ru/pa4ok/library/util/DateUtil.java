@@ -5,9 +5,19 @@ import java.util.Date;
 
 public class DateUtil
 {
+    //yyyy.MM.dd G HH:mm:ss z
+
+    public static final long MILL_SECOND = 1000L;
+    public static final long MILL_MINUTE = MILL_SECOND * 60;
+    public static final long MILL_HOUR = MILL_MINUTE * 60;
+    public static final long MILL_DAY = MILL_HOUR * 24;
+    public static final long MILL_WEEK = MILL_DAY * 7;
+
     public static final SimpleDateFormat YEAR_FORMAT = new SimpleDateFormat("yyyy");
     public static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MM");
     public static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("dd");
+
+    public static final SimpleDateFormat STANDART_DATE_TIME = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
 
     public static String getYear() {
         return YEAR_FORMAT.format(new Date());
@@ -33,21 +43,21 @@ public class DateUtil
             "September",
             "October",
             "November",
-            "December"
+            "December",
     };
 
     public static final String[] MONTHS_RU = new String[] {
-            "январь",
-            "февраль",
-            "март",
-            "апрель",
-            "май",
-            "июнь",
-            "июль",
-            "август",
-            "сентябрь",
-            "октябрь",
-            "ноябрь",
-            "декабрь"
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь"
     };
 }
