@@ -23,7 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74375865-9121-48ec-94c8-1630ff1d7bd0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/http/NetworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/http/NetworkManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/ResourceUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/util/ResourceUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/ru/pa4ok/library/data/message" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -100,7 +101,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -112,6 +113,8 @@
       <option name="presentableId" value="Default" />
       <updated>1598364662397</updated>
       <workItem from="1598364663667" duration="1121000" />
+      <workItem from="1598431470915" duration="39000" />
+      <workItem from="1598514875096" duration="263000" />
     </task>
     <servers />
   </component>
@@ -139,6 +142,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="701" y="19" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598373126358" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1598431506903">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598431506903" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1598373898540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -159,5 +166,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598044287540" />
+    <state x="551" y="140" key="new project wizard" timestamp="1598431508462">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="551" y="140" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1598431508462" />
   </component>
 </project>
