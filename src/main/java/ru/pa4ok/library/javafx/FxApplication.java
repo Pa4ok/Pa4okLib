@@ -13,7 +13,7 @@ public abstract class FxApplication extends Application
     private boolean resizable;
     private Parent root;
 
-    public FxApplication(String title, boolean resizable, Parent root)
+    protected void initUi(String title, boolean resizable, Parent root)
     {
         this.title = title;
         this.resizable = resizable;
