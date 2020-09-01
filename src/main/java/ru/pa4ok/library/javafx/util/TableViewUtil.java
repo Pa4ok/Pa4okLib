@@ -1,4 +1,4 @@
-package ru.pa4ok.library.javafx;
+package ru.pa4ok.library.javafx.util;
 
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.application.Platform;

@@ -1,4 +1,4 @@
-package ru.pa4ok.library.javafx;
+package ru.pa4ok.library.javafx.util;
 
 import javafx.scene.control.Alert;
 
