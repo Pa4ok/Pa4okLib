@@ -8,6 +8,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import ru.pa4ok.library.data.NetworkException;
+import ru.pa4ok.library.data.message.JsonClientMessage;
 import ru.pa4ok.library.data.message.JsonServerMessage;
 import ru.pa4ok.library.util.GsonUtil;
 import ru.pa4ok.library.util.Tuple;
@@ -17,9 +19,8 @@ import java.util.List;
 
 //https://coderlessons.com/tutorials/java-tekhnologii/izuchite-apache-http-client/apache-httpclient-kratkoe-rukovodstvo
 
-public class HttpNetworkManager
+public class HttpNetworkManager implements AutoCloseable
 {
-
     private CloseableHttpClient httpClient;
 
     public HttpNetworkManager()
@@ -27,16 +28,12 @@ public class HttpNetworkManager
         this.httpClient = HttpClients.createDefault();
     }
 
-    public void onDisable()
-    {
-        try {
-            this.httpClient.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void close() throws Exception {
+        this.httpClient.close();
     }
 
-    public HttpPost createJsonPost(String url, List<Tuple<String, String>> headers, String json)
+    private HttpPost createJsonPost(String url, List<Tuple<String, String>> headers, String json)
     {
         HttpPost post = new HttpPost(url);
         post.setEntity(new StringEntity(json, "UTF-8"));
@@ -51,24 +48,26 @@ public class HttpNetworkManager
         return post;
     }
 
-    public <T extends JsonServerMessage> T doJsonPost(String url, List<Tuple<String, String>> headers, String json, Class<T> responseClass) throws Exception
-    {
-        CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, json));
+    private <T extends JsonServerMessage> T checkServerError(T response) throws NetworkException {
+        if(response == null) {
+            if(response.getError() != null) {
+                throw new NetworkException(response.getError());
+            }
+            throw new NetworkException();
+        }
+        return response;
+    }
+
+    public <V extends JsonClientMessage, T extends JsonServerMessage> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws IOException, NetworkException, HttpException {
+        CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, clientMessage.toString()));
         if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
             throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         }
         String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-
-        JsonServerMessage serverMessage = GsonUtil.gson.fromJson(jsonResponse, JsonServerMessage.class);
-        if(serverMessage.error != null) {
-            throw   new HttpException("Server error: " + serverMessage.error);
-        }
-
-        return GsonUtil.gson.fromJson(jsonResponse, responseClass);
+        return checkServerError(GsonUtil.gson.fromJson(jsonResponse, responseClass));
     }
 
-    public <T extends JsonServerMessage> T doJsonPost(String url, String json, Class<T> responseClass) throws Exception
-    {
-        return doJsonPost(url, null, json, responseClass);
+    public <V extends JsonClientMessage, T extends JsonServerMessage> T doJsonPost(String url, V clientMessage, Class<T> responseClass) throws IOException, HttpException, NetworkException {
+        return doJsonPost(url, null, clientMessage, responseClass);
     }
 }
