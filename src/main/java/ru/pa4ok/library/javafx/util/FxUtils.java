@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ru.pa4ok.library.javafx.form.InitableForm;
+import ru.pa4ok.library.javafx.form.MenuForm;
 
 import java.awt.Robot;
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class FxUtils
         } catch (IOException e) {
             throw new RuntimeException("Error while loading FXML & set up controller", e);
         }
+
+        ((MenuForm)parent).initMenu();
     }
 
     public static Stage createPopupStage(Stage mainStage, String title, Parent root)
@@ -31,6 +35,10 @@ public class FxUtils
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(mainStage);
+
+        if(root instanceof InitableForm) {
+            ((InitableForm)root).init();
+        }
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("style.css");
