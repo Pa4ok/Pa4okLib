@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.pa4ok.library.javafx.form.InitableForm;
 import ru.pa4ok.library.javafx.form.NoCacheForm;
+import ru.pa4ok.library.javafx.form.NoCachedFormException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,15 +48,28 @@ public abstract class FxApplication extends Application
 
     public void changeScene(Parent root, boolean updateCache)
     {
-        Scene scene = checkCache(root, updateCache);
-        scene.getStylesheets().add("style.css");
-        stage.setScene(scene);
-        stage.centerOnScreen();
+        changeScene(checkCache(root, updateCache));
     }
 
     public void changeScene(Parent root)
     {
         changeScene(root, false);
+    }
+
+    public void changeFormFromCache(Class<? extends Parent> cls) throws NoCachedFormException
+    {
+        Scene scene = formCache.get(cls);
+        if(scene == null) {
+            throw new NoCachedFormException(cls);
+        }
+        changeScene(scene);
+    }
+
+    private void changeScene(Scene scene)
+    {
+        scene.getStylesheets().add("style.css");
+        stage.setScene(scene);
+        stage.centerOnScreen();
     }
 
     private Scene checkCache(Parent root, boolean updateCache)
