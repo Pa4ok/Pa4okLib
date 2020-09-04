@@ -3,3 +3,5 @@ out/
 .idea/
 Pa4okLib.iml
 library.iml
+application.log
+logs/
