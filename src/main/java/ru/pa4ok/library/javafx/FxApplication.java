@@ -5,15 +5,23 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.pa4ok.library.javafx.form.InitableForm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.pa4ok.library.javafx.form.NoCacheForm;
-import ru.pa4ok.library.javafx.form.NoCachedFormException;
+import ru.pa4ok.library.javafx.form.UpdatableForm;
+import ru.pa4ok.library.util.Log4jUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class FxApplication extends Application
 {
+    static {
+        Log4jUtil.configureLogging();
+    }
+
+    private static final Logger logger = LogManager.getLogger(FxApplication.class);
+
     private final Map<Class<? extends Parent>, Scene> formCache = new HashMap<>();
 
     protected Stage stage;
@@ -34,7 +42,7 @@ public abstract class FxApplication extends Application
         this.stage = stage;
         stage.setTitle(title);
         stage.setResizable(resizable);
-        changeScene(root);
+        changeForm(root);
         stage.show();
     }
 
@@ -46,66 +54,47 @@ public abstract class FxApplication extends Application
 
     protected abstract void onAppStop();
 
-    public void changeScene(Parent root, boolean updateCache)
-    {
-        changeScene(checkCache(root, updateCache));
+    public boolean hasCacheForm(Class<? extends Parent> cls) {
+        return formCache.containsKey(cls);
     }
 
-    public void changeScene(Parent root)
-    {
-        changeScene(root, false);
+    public void clearFormCache() {
+        formCache.clear();
     }
 
-    public void changeFormFromCache(Class<? extends Parent> cls) throws NoCachedFormException
+    public void changeForm(Parent root)
+    {
+        Class<? extends Parent> cls = root.getClass();
+        Scene scene = new Scene(root);
+
+        if(!cls.isAnnotationPresent(NoCacheForm.class)) {
+            formCache.put(cls, scene);
+        }
+
+        changeForm(scene);
+    }
+
+    public void changeFormFromCache(Class<? extends Parent> cls) throws NoCachedSceneException
     {
         Scene scene = formCache.get(cls);
         if(scene == null) {
-            throw new NoCachedFormException(cls);
+            throw new NoCachedSceneException(cls);
         }
-        changeScene(scene);
+
+        if(scene.getRoot() instanceof UpdatableForm) {
+            long startMills = System.currentTimeMillis();
+            ((UpdatableForm)scene.getRoot()).update();
+            logger.debug("Form '" + cls.getSimpleName() + "' update from cache by " + (System.currentTimeMillis() - startMills) + "ms");
+        }
+
+        changeForm(scene);
     }
 
-    private void changeScene(Scene scene)
+    private void changeForm(Scene scene)
     {
         scene.getStylesheets().add("style.css");
         stage.setScene(scene);
         stage.centerOnScreen();
-    }
-
-    private Scene checkCache(Parent root, boolean updateCache)
-    {
-        Class<? extends Parent> cls = root.getClass();
-
-        if(cls.isAnnotationPresent(NoCacheForm.class)) {
-            checkInit(root);
-            return new Scene(root);
-        }
-
-        if(updateCache)
-        {
-            checkInit(root);
-            Scene scene = new Scene(root);
-            formCache.put(cls, scene);
-            return scene;
-        }
-
-        Scene sceneFromCache = formCache.get(cls);
-        if(sceneFromCache == null)
-        {
-            checkInit(root);
-            Scene scene = new Scene(root);
-            formCache.put(cls, scene);
-            return scene;
-        }
-
-        return sceneFromCache;
-    }
-
-    private void checkInit(Parent root)
-    {
-        if(root instanceof InitableForm) {
-            ((InitableForm)root).init();
-        }
     }
 
     public Stage getStage() {

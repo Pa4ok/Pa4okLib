@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 
 public class Log4jUtil
 {
-    public static void configureLogging()
+    public static void configureLogging(String logName)
     {
         ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
 
@@ -34,17 +34,21 @@ public class Log4jUtil
         builder.add(console);
 
         /*AppenderComponentBuilder file = builder.newAppender("log", "File");
-        file.addAttribute("fileName", "logs/application.log");
+        file.addAttribute("fileName", "logs/" + logName + ".log");
         file.add(layout);
         builder.add(file);*/
 
         AppenderComponentBuilder rolling = builder.newAppender("rolling", "RollingFile");
-        rolling.addAttribute("fileName", "logs/application.log");
-        rolling.addAttribute("filePattern", "logs/%d{MM-dd-yy}.log.gz");
+        rolling.addAttribute("fileName", "logs/" + logName + ".log");
+        rolling.addAttribute("filePattern", "logs/%d{dd-MM-yy}-" + logName + ".log.gz");
         rolling.addComponent(policy);
         rolling.add(layout);
         builder.add(rolling);
 
         Configurator.initialize(builder.build());
+    }
+
+    public static void configureLogging() {
+        configureLogging("application");
     }
 }

@@ -1,10 +1,8 @@
 package ru.pa4ok.library.util.sorting;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Random;
 
-public interface ISortable<E extends Number & Comparable<? super E>>
+public interface ISortable<E extends Comparable<? super E>>
 {
 	public String getName();
 	
