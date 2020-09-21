@@ -45,7 +45,7 @@ public class Application
         FontUtil.changeAllFonts(new FontUIResource("Arial", Font.TRUETYPE_FONT, 12));
         BaseForm.setBaseApplicationTitle("Салон красоты Бровушка");
         try {
-            BaseForm.setBaseApplicationIcon(ResourceUtil.getImage("beauty_logo.png"));
+            BaseForm.setBaseApplicationIcon(ResourceUtil.getImage("icon.jpg"));
         } catch (Exception e) {
             e.printStackTrace();
             DialogUtil.showError("Не удалось загрузить иконку приложения");
