@@ -60,4 +60,33 @@ public class DateUtil
             "Ноябрь",
             "Декабрь"
     };
+
+    public static enum MonthEnum
+    {
+        JANUARY,
+        FEBRUARY,
+        MARCH,
+        APRIL,
+        MAY,
+        JUNE,
+        JULY,
+        AUGUST,
+        SEPTEMBER,
+        OCTOBER,
+        NOVEMBER,
+        DECEMBER;
+
+        @Override
+        public String toString() {
+            return MONTHS_EN[this.ordinal()];
+        }
+
+        public String en() {
+            return MONTHS_EN[this.ordinal()];
+        }
+
+        public String rus() {
+            return MONTHS_RU[this.ordinal()];
+        }
+    }
 }
