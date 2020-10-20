@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.pa4ok.library.javafx.form.NoCacheForm;
 import ru.pa4ok.library.javafx.form.UpdatableForm;
+import ru.pa4ok.library.javafx.util.FxUtils;
 import ru.pa4ok.library.util.Log4jUtil;
 
 import java.util.HashMap;
@@ -26,13 +27,11 @@ public abstract class FxApplication extends Application
 
     protected Stage stage;
     private String title;
-    private boolean resizable;
     private Parent root;
 
-    protected void initUi(String title, boolean resizable, Parent root)
+    protected void initUi(String title, Parent root)
     {
         this.title = title;
-        this.resizable = resizable;
         this.root = root;
     }
 
@@ -41,7 +40,6 @@ public abstract class FxApplication extends Application
     {
         this.stage = stage;
         stage.setTitle(title);
-        stage.setResizable(resizable);
         changeForm(root);
         stage.show();
     }
@@ -94,6 +92,7 @@ public abstract class FxApplication extends Application
     {
         scene.getStylesheets().add("style.css");
         stage.setScene(scene);
+        FxUtils.setStageSizesFromRootElement(stage);
         stage.centerOnScreen();
     }
 

@@ -5,6 +5,8 @@ import java.util.Properties;
 
 public class OtherUtils
 {
+    public static final String DEPRECATED_ELEMENT = "|DEPRECATED|";
+
     public static void safeSleep(long ms) {
         try {
             Thread.sleep(ms);
