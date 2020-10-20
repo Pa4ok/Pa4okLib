@@ -27,17 +27,16 @@ public class OtherUtils
 
     }
 
-    /**
-     * Add some checks later
-     */
-    @SuppressWarnings("unchecked")
     public static <T> T getProperty(Properties props, String property, T base)
     {
         if(props != null && props.contains(property)) {
             System.out.println(property + ":" + props.getProperty(property));
-            return (T)props.getProperty(property);
+            try {
+                return (T)props.getProperty(property);
+            } catch (Exception e) {
+                return base;
+            }
         }
-        System.out.println("base:" + property + ":" + base);
         return base;
     }
 }
