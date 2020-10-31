@@ -127,8 +127,8 @@ public class SortUtil
     {
         int lengthLeft = mid - left + 1;
         int lengthRight = right - mid;
-        E leftArray[] = (E[])new Object[lengthLeft];
-        E rightArray[] = (E[])new Object[lengthRight];
+        E leftArray[] = (E[])new Comparable[lengthLeft];
+        E rightArray[] = (E[])new Comparable[lengthRight];
 
         for (int i = 0; i < lengthLeft; i++)
         {
