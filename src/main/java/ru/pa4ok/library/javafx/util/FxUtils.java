@@ -104,6 +104,15 @@ public class FxUtils
         }
     }
 
+    public static void checkStageForMaximized(Stage oldStage, Stage newStage)
+    {
+        if(oldStage.isMaximized()) {
+            if(newStage.getMaxWidth() >= oldStage.getWidth() && newStage.getMaxHeight() >= oldStage.getHeight()) {
+                newStage.setMaximized(true);
+            }
+        }
+    }
+
     public static <T> void checkComboBox(ComboBox<T> comboBox)
     {
         List<T> listToRemove = new ArrayList<>();
