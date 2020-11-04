@@ -57,6 +57,9 @@ public class HttpNetworkManager implements AutoCloseable
         if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
             throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
         }
+        if(responseClass == null) {
+            return null;
+        }
         String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
         logger.debug("Get post response: " + jsonResponse);
 
@@ -65,6 +68,15 @@ public class HttpNetworkManager implements AutoCloseable
 
     public <V, T> T doJsonPost(String url, V clientMessage, Class<T> responseClass) throws IOException, HttpException {
         return doJsonPost(url, null, clientMessage, responseClass);
+    }
+
+    public <V, T> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage) throws IOException, HttpException
+    {
+        return doJsonPost(url, headers, clientMessage, null);
+    }
+
+    public <V, T> T doJsonPost(String url, V clientMessage) throws IOException, HttpException {
+        return doJsonPost(url, null, clientMessage, null);
     }
 
     public <V, T> List<T> doJsonPostForList(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws IOException, HttpException
