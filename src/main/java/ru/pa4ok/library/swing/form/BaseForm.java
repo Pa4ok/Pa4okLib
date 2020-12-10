@@ -12,7 +12,7 @@ public abstract class BaseForm extends JFrame
 
     public BaseForm()
     {
-        setTitle(getBaseApplicationTitle());
+        setTitle(baseApplicationTitle);
         if(baseApplicationIcon != null) {
             setIconImage(baseApplicationIcon);
         }
