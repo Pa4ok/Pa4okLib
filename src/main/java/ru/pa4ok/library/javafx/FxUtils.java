@@ -1,4 +1,4 @@
-package ru.pa4ok.library.javafx.util;
+package ru.pa4ok.library.javafx;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

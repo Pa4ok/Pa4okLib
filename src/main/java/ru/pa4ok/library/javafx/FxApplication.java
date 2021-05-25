@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.pa4ok.library.javafx.form.CachedForm;
 import ru.pa4ok.library.javafx.form.UpdatableCachedForm;
-import ru.pa4ok.library.javafx.util.FxUtils;
 import ru.pa4ok.library.util.Log4jUtil;
 
 import java.util.HashMap;

@@ -1,5 +1,6 @@
-package ru.pa4ok.library.javafx.util;
+package ru.pa4ok.library.javafx;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -14,14 +15,29 @@ public class DialogUtil
         alert.showAndWait();
     }
 
+    private static void showAlertLater(Alert.AlertType type, String title, String headerText, String text)
+    {
+        Platform.runLater(() -> showAlert(type, title, headerText, text));
+    }
+
     public static void showError(String headerText, String text)
     {
         showAlert(Alert.AlertType.ERROR, "Ошибка", headerText, text);
     }
 
+    public static void showErrorLater(String headerText, String text)
+    {
+        showAlertLater(Alert.AlertType.ERROR, "Ошибка", headerText, text);
+    }
+
     public static void showError(String text)
     {
-        showError(null, text);
+        showAlert(Alert.AlertType.ERROR, "Ошибка", null, text);
+    }
+
+    public static void showErrorLater(String text)
+    {
+        showAlertLater(Alert.AlertType.ERROR, "Ошибка", null, text);
     }
 
     public static void showWarning(String headerText, String text)
@@ -29,9 +45,19 @@ public class DialogUtil
         showAlert(Alert.AlertType.WARNING, "Предупреждение", headerText, text);
     }
 
+    public static void showWarningLater(String headerText, String text)
+    {
+        showAlertLater(Alert.AlertType.WARNING, "Предупреждение", headerText, text);
+    }
+
     public static void showWarning(String text)
     {
-        showWarning(null, text);
+        showAlert(Alert.AlertType.WARNING, "Предупреждение", null, text);
+    }
+
+    public static void showWarningLater(String text)
+    {
+        showAlertLater(Alert.AlertType.WARNING, "Предупреждение", null, text);
     }
 
     public static void showInfo(String headerText, String text)
@@ -39,9 +65,19 @@ public class DialogUtil
         showAlert(Alert.AlertType.INFORMATION, "Информация", headerText, text);
     }
 
+    public static void showInfoLater(String headerText, String text)
+    {
+        showAlertLater(Alert.AlertType.INFORMATION, "Информация", headerText, text);
+    }
+
     public static void showInfo(String text)
     {
-        showInfo(null, text);
+        showAlert(Alert.AlertType.INFORMATION, "Информация", null, text);
+    }
+
+    public static void showInfoLater(String text)
+    {
+        showAlertLater(Alert.AlertType.INFORMATION, "Информация", null, text);
     }
 
     public static boolean showConfirm(String headerText, String text)
@@ -61,4 +97,5 @@ public class DialogUtil
     public static boolean showConfirm(String text) {
         return showConfirm(null, text);
     }
+
 }
