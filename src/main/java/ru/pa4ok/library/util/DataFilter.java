@@ -1,180 +1,136 @@
 package ru.pa4ok.library.util;
 
-import javax.xml.crypto.Data;
-
+@FunctionalInterface
 public interface DataFilter<T>
 {
-    public boolean filter(T s);
+    boolean filter(T s);
 
-    public static final DataFilter<String> allowFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
+    DataFilter<String> allowFilter = s -> true;
+
+    DataFilter<String> denyFilter = s -> false;
+
+    DataFilter<String> intFilter = s -> {
+        try {
+            Integer.parseInt(s);
             return true;
-        }
-    };
-
-    public static final DataFilter<String> denyFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
+        } catch (NumberFormatException e) {
             return false;
         }
     };
 
-    public static final DataFilter<String> intFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                Integer.parseInt(s);
+    DataFilter<String> positiveIntFilter = s -> {
+        try {
+            if(Integer.parseInt(s) < 0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    DataFilter<String> longFilter = s -> {
+        try {
+            Long.parseLong(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    DataFilter<String> positiveLongFilter = s -> {
+        try {
+            if(Long.parseLong(s) < 0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    DataFilter<String> doubleFilter = s -> {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    DataFilter<String> positiveDoubleFilter = s -> {
+        try {
+            if(Double.parseDouble(s) < 0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    };
+
+    DataFilter<String> booleanFilter = s -> {
+        try {
+            if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
                 return true;
-            } catch (NumberFormatException e) {
-                return false;
             }
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     };
 
-    public static final DataFilter<String> positiveIntFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                if(Integer.parseInt(s) < 0) {
-                    return false;
-                }
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-    };
-
-    public static final DataFilter<String> longFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                Long.parseLong(s);
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-    };
-
-    public static final DataFilter<String> positiveLongFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                if(Long.parseLong(s) < 0) {
-                    return false;
-                }
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-    };
-
-    public static final DataFilter<String> doubleFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                Double.parseDouble(s);
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-    };
-
-    public static final DataFilter<String> positiveDoubleFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                if(Double.parseDouble(s) < 0) {
-                    return false;
-                }
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-    };
-
-    public static final DataFilter<String> booleanFilter = new DataFilter<String>() {
-        @Override
-        public boolean filter(String s) {
-            try {
-                if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
-                    return true;
-                }
-                return false;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-    };
-
-    public static DataFilter<String> createBoundStringFilter(int min, int max)
+    static DataFilter<String> createBoundStringFilter(int min, int max)
     {
-        return new DataFilter<String>() {
-            @Override
-            public boolean filter(String s) {
-                if(s.length() < min || s.length() > max) {
+        return s -> {
+            if(s.length() < min || s.length() > max) {
+                return false;
+            }
+            return true;
+        };
+    }
+
+    static DataFilter<String> createBoundIntFilter(int min, int max)
+    {
+        return s -> {
+            try {
+                int i = Integer.parseInt(s);
+                if(i < min || i > max) {
                     return false;
                 }
                 return true;
+            } catch (NumberFormatException e) {
+                return false;
             }
         };
     }
 
-    public static DataFilter<String> createBoundIntFilter(int min, int max)
+    static DataFilter<String> createBoundLongFilter(long min, long max)
     {
-        return new DataFilter<String>() {
-            @Override
-            public boolean filter(String s) {
-                try {
-                    int i = Integer.parseInt(s);
-                    if(i < min || i > max) {
-                        return false;
-                    }
-                    return true;
-                } catch (NumberFormatException e) {
+        return s -> {
+            try {
+                long l = Long.parseLong(s);
+                if(l < min || l > max) {
                     return false;
                 }
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
             }
         };
     }
 
-    public static DataFilter<String> createBoundLongFilter(long min, long max)
+    static DataFilter<String> createBoundDoubleFilter(double min, double max)
     {
-        return new DataFilter<String>() {
-            @Override
-            public boolean filter(String s) {
-                try {
-                    long l = Long.parseLong(s);
-                    if(l < min || l > max) {
-                        return false;
-                    }
-                    return true;
-                } catch (NumberFormatException e) {
+        return s -> {
+            try {
+                double d = Double.parseDouble(s);
+                if(d < min || d > max) {
                     return false;
                 }
-            }
-        };
-    }
-
-    public static DataFilter<String> createBoundDoubleFilter(double min, double max)
-    {
-        return new DataFilter<String>() {
-            @Override
-            public boolean filter(String s) {
-                try {
-                    double d = Double.parseDouble(s);
-                    if(d < min || d > max) {
-                        return false;
-                    }
-                    return true;
-                } catch (NumberFormatException e) {
-                    return false;
-                }
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
             }
         };
     }
