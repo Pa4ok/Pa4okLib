@@ -2,24 +2,26 @@ package ru.pa4ok.library.swing.jtable;
 
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CustomTableModel<T> extends AbstractTableModel
 {
     private final Class<T> cls;
-    private String[] columnNames;
-    private final List<T> values;
+    private final String[] columnNames;
+    private List<T> rows;
 
-    public CustomTableModel(Class<T> cls, String[] columnNames, List<T> initialValues)
+    public CustomTableModel(Class<T> cls, String[] columnNames, List<T> rows)
     {
         this.cls = cls;
         this.columnNames = columnNames;
-        this.values = initialValues;
+        this.rows = rows;
     }
 
     @Override
     public int getRowCount() {
-        return values.size();
+        return rows.size();
     }
 
     @Override
@@ -28,13 +30,13 @@ public class CustomTableModel<T> extends AbstractTableModel
     }
 
     @Override
-    public String getColumnName(int column) {
-        return columnNames[column];
+    public Class<?> getColumnClass(int columnIndex) {
+        return cls.getDeclaredFields()[columnIndex].getType();
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return cls.getDeclaredFields()[columnIndex].getType();
+    public String getColumnName(int column) {
+        return column >= columnNames.length ? cls.getDeclaredFields()[column].getName() : columnNames[column];
     }
 
     @Override
@@ -42,14 +44,24 @@ public class CustomTableModel<T> extends AbstractTableModel
         try {
             Field field = cls.getDeclaredFields()[columnIndex];
             field.setAccessible(true);
-            return field.get(values.get(rowIndex));
+            return field.get(this.rows.get(rowIndex));
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return "ERROR";
         }
     }
 
-    public List<T> getValues() {
-        return values;
+    public void sort(Comparator<T> comparator)
+    {
+        Collections.sort(this.rows, comparator);
+        this.fireTableDataChanged();
+    }
+
+    public List<T> getRows() {
+        return rows;
+    }
+
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 }

@@ -4,11 +4,11 @@ import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public abstract class BaseSubForm extends BaseForm
+public abstract class BaseSubForm<T extends BaseForm> extends BaseForm
 {
-    protected final BaseForm mainForm;
+    protected final T mainForm;
 
-    public BaseSubForm(BaseForm mainFormIn)
+    public BaseSubForm(T mainFormIn)
     {
         this.mainForm = mainFormIn;
 
