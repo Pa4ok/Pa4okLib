@@ -7,7 +7,4 @@
 - Swing и JavaFx
 - Apache HttpClient
 - Google gson
-- Log4j
-
-## ru.pa4ok.example
-В этом пакете лежит старый пример десктопного приложения на Swing с моего демо экзамена, делать примеры на все новые утилиты мне лень
+- Apache Log4j2
