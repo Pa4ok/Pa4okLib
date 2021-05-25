@@ -39,4 +39,19 @@ public class OtherUtils
         }
         return base;
     }
+
+    public static Double parseRusDouble(String s)
+    {
+        if(s == null || s.isEmpty()) {
+            return null;
+        }
+
+        try {
+            s = s.replaceAll(",", ".");
+            s = s.trim();
+            return Double.parseDouble(s);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
