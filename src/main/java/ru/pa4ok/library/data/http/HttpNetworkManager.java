@@ -27,8 +27,7 @@ public class HttpNetworkManager implements AutoCloseable
     private final Gson gson = GsonUtil.gson;
     private CloseableHttpClient httpClient;
 
-    public HttpNetworkManager()
-    {
+    public HttpNetworkManager() {
         this.httpClient = HttpClients.createDefault();
     }
 
@@ -37,62 +36,77 @@ public class HttpNetworkManager implements AutoCloseable
         this.httpClient.close();
     }
 
-    private HttpPost createJsonPost(String url, List<Tuple<String, String>> headers, String json)
+    private HttpPost createJsonPost(String url, List<Tuple<String, String>> headers, Object toJsonEntity)
     {
         HttpPost post = new HttpPost(url);
-        post.setEntity(new StringEntity(json, "UTF-8"));
+        if (toJsonEntity != null) {
+            post.setEntity(new StringEntity(String.valueOf(toJsonEntity), "UTF-8"));
+        }
         post.setHeader("Accept", "application/json");
         post.setHeader("Content-type", "application/json");
         post.setHeader("Accept-Encoding", "UTF-8");
-        if(headers != null) {
+        if (headers != null) {
             headers.forEach(h -> post.setHeader(h.getFirst(), h.getSecond()));
         }
         return post;
     }
 
-    public <V, T> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws IOException, HttpException
+    public <V, T> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws HttpException
     {
-        logger.debug("Send post request: url='" + url + "'" + ", headers='" + headers.toString() + "'" + ", body='" + clientMessage.toString() + "'");
-        CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, clientMessage.toString()));
-        if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-            throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        }
-        if(responseClass == null) {
-            return null;
-        }
-        String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-        logger.debug("Get post response: " + jsonResponse);
+        try {
+            logger.debug("Send post request: url='" + url + "'" + (headers != null ? ", headers='" + headers.toString() : "") + "'" + ", body='" + String.valueOf(clientMessage) + "'");
+            CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, clientMessage));
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+            }
+            if (responseClass == null) {
+                return null;
+            }
+            if (response.getEntity() == null) {
+                return null;
+            }
+            String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
+            logger.debug("Get post response: " + jsonResponse);
 
-        return gson.fromJson(jsonResponse, responseClass);
+            return gson.fromJson(jsonResponse, responseClass);
+        } catch (IOException e) {
+            throw new HttpException("IO error in request", e);
+        }
     }
 
-    public <V, T> T doJsonPost(String url, V clientMessage, Class<T> responseClass) throws IOException, HttpException {
+    public <V, T> T doJsonPost(String url, V clientMessage, Class<T> responseClass) throws HttpException {
         return doJsonPost(url, null, clientMessage, responseClass);
     }
 
-    public <V, T> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage) throws IOException, HttpException
-    {
+    public <V, T> T doJsonPost(String url, List<Tuple<String, String>> headers, V clientMessage) throws HttpException {
         return doJsonPost(url, headers, clientMessage, null);
     }
 
-    public <V, T> T doJsonPost(String url, V clientMessage) throws IOException, HttpException {
+    public <V, T> T doJsonPost(String url, V clientMessage) throws HttpException {
         return doJsonPost(url, null, clientMessage, null);
     }
 
-    public <V, T> List<T> doJsonPostForList(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws IOException, HttpException
+    public <V, T> List<T> doJsonPostForList(String url, List<Tuple<String, String>> headers, V clientMessage, Class<T> responseClass) throws HttpException
     {
-        logger.debug("Send post request: url='" + url + "'" + ", headers='" + headers.toString() + "'" + ", body='" + clientMessage.toString() + "'");
-        CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, clientMessage.toString()));
-        if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-            throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
-        }
-        String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-        logger.debug("Get post response: " + jsonResponse);
+        try {
+            logger.debug("Send post request: url='" + url + "'" + ", headers='" + headers.toString() + "'" + ", body='" + String.valueOf(clientMessage) + "'");
+            CloseableHttpResponse response = httpClient.execute(createJsonPost(url, headers, clientMessage));
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                throw new HttpException(response.getStatusLine().getStatusCode() + " " + response.getStatusLine().getReasonPhrase());
+            }
+            if (response.getEntity() == null) {
+                return null;
+            }
+            String jsonResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
+            logger.debug("Get post response: " + jsonResponse);
 
-        return gson.fromJson(jsonResponse, TypeToken.getParameterized(List.class, responseClass).getType());
+            return gson.fromJson(jsonResponse, TypeToken.getParameterized(List.class, responseClass).getType());
+        } catch (IOException e) {
+            throw new HttpException("IO error in request", e);
+        }
     }
 
-    public <V, T> List<T> doJsonPostForList(String url, V clientMessage, Class<T> responseClass) throws IOException, HttpException {
+    public <V, T> List<T> doJsonPostForList(String url, V clientMessage, Class<T> responseClass) throws HttpException {
         return doJsonPostForList(url, null, clientMessage, responseClass);
     }
 }
