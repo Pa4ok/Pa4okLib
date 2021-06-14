@@ -1,9 +1,12 @@
 package ru.pa4ok.library.javafx;
 
+import com.sun.javafx.stage.StageHelper;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -43,6 +46,16 @@ public class FxUtils
     public static void loadFxmlAndController(Parent parent)
     {
         loadFxmlAndController(parent, "");
+    }
+
+    public static Image loadImage(String resourcePath, boolean backgroundLoading)
+    {
+        return new Image("image/" + resourcePath, backgroundLoading);
+    }
+
+    public static Image loadImage(String resourcePath)
+    {
+        return loadImage(resourcePath, false);
     }
 
     public static void createPopupStage(Stage mainStage, String title, Parent root)
@@ -120,5 +133,15 @@ public class FxUtils
                 .filter(item -> String.valueOf(item).equals(OtherUtils.DEPRECATED_ELEMENT))
                 .forEach(item -> listToRemove.add(item));
         comboBox.getItems().removeAll(listToRemove);
+    }
+
+    public static void changeCursorOnAllStages(Cursor cursor)
+    {
+        StageHelper.getStages().forEach(stage -> {
+            Scene scene = stage.getScene();
+            if(scene != null) {
+                scene.setCursor(cursor);
+            }
+        });
     }
 }
