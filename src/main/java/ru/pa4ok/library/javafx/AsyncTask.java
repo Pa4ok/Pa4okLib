@@ -3,6 +3,7 @@ package ru.pa4ok.library.javafx;
 import javafx.application.Platform;
 import javafx.scene.ImageCursor;
 import org.apache.http.HttpException;
+import org.apache.http.conn.HttpHostConnectException;
 import ru.pa4ok.library.util.Action;
 import ru.pa4ok.library.util.ActionWithException;
 
@@ -17,18 +18,27 @@ public class AsyncTask
     private Action onStart = () -> FxUtils.changeCursorOnAllStages(ImageCursor.WAIT);
     private Action onFinish = () -> FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
 
-    private Consumer<Exception> exceptionHandler = e -> {
+    private Consumer<Exception> exceptionHandler = e ->
+    {
+        //TODO: some logging here
         e.printStackTrace();
+
         String message = e.getMessage();
+        String errorToShow;
+
         if(e instanceof HttpException) {
-            if(message.toLowerCase().startsWith("403")) {
-                DialogUtil.showErrorLater("Ошибка доступа (403)");
+            if(e.getCause() != null && e.getCause() instanceof HttpHostConnectException) {
+                errorToShow = "Отстутствует подключение к серверу";
+            } else if(message.toLowerCase().startsWith("403")) {
+                errorToShow = "Ошибка доступа (403)";
             } else {
-                DialogUtil.showErrorLater("Ошибка получения данных с сервера: " + message);
+                errorToShow = "Ошибка получения данных с сервера: " + message;
             }
         } else {
-            DialogUtil.showErrorLater("Ошибка: " + message);
+            errorToShow = "Ошибка: " + message;
         }
+
+        DialogUtil.showErrorLater(errorToShow);
     };
 
     private ActionWithException doInBackground;
@@ -74,19 +84,14 @@ public class AsyncTask
 
             try {
                 doInBackground.action();
-
-                if(this.single) {
-                    synchronized (singleTaskActive) {
-                        singleTaskActive = false;
-                    }
-                }
-
             } catch (Exception e) {
                 if(exceptionHandler != null) {
                     exceptionHandler.accept(e);
                 } else {
                     throw new RuntimeException("Exception in async task", e);
                 }
+            } finally {
+                finishSingle();
             }
 
             if(onFinish != null) {
@@ -97,6 +102,15 @@ public class AsyncTask
         thread.setDaemon(true);
         thread.setName("TaskThread-" + taskCounter.incrementAndGet());
         thread.start();
+    }
+
+    private void finishSingle()
+    {
+        if(this.single) {
+            synchronized (singleTaskActive) {
+                singleTaskActive = false;
+            }
+        }
     }
 
     public Action getOnStart() {
