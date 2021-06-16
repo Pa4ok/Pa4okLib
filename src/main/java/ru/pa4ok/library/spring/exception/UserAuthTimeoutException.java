@@ -1,4 +1,4 @@
-package ru.pa4ok.library.network.exception;
+package ru.pa4ok.library.spring.exception;
 
 public class UserAuthTimeoutException extends RuntimeException
 {
