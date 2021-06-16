@@ -1,4 +1,4 @@
-package ru.pa4ok.library.network.spring;
+package ru.pa4ok.library.spring;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
