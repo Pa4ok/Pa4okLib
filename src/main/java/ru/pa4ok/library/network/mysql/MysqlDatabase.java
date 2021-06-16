@@ -1,4 +1,4 @@
-package ru.pa4ok.library.data.mysql;
+package ru.pa4ok.library.network.mysql;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 

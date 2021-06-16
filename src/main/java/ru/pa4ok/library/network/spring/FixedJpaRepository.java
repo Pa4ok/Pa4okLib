@@ -1,4 +1,4 @@
-package ru.pa4ok.library.data.hibernate;
+package ru.pa4ok.library.network.spring;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

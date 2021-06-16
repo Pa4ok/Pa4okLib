@@ -1,4 +1,4 @@
-package ru.pa4ok.library.data;
+package ru.pa4ok.library.network.spring;
 
 import com.google.gson.Gson;
 import org.springframework.http.HttpStatus;
