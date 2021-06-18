@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER" spacing="15.0" type="VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressIndicator fx:id="barIndicator" prefHeight="70.0" />
+      <ProgressBar fx:id="bar" prefHeight="24.0" prefWidth="300.0" progress="0.0" />
+      <Label fx:id="barLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" text="Инициализация..." textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>
