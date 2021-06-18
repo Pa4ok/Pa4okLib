@@ -1,12 +1,15 @@
 package ru.pa4ok.library.javafx;
 
 import com.sun.javafx.stage.StageHelper;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -74,14 +77,29 @@ public class FxUtils
         stage.show();
     }
 
+    public static void createPopupStageLater(Stage mainStage, String title, Parent root)
+    {
+        Platform.runLater(() -> createPopupStage(mainStage, title, root));
+    }
+
     public static void createPopupStage(Stage mainStage, Parent root)
     {
         createPopupStage(mainStage, null, root);
     }
 
+    public static void createPopupStageLater(Stage mainStage, Parent root)
+    {
+        Platform.runLater(() -> createPopupStage(mainStage, root));
+    }
+
     public static void closeElementStage(Parent element)
     {
         ((Stage)element.getScene().getWindow()).close();
+    }
+
+    public static void closeElementStageLater(Parent element)
+    {
+        Platform.runLater(() -> closeElementStage(element));
     }
 
     public static void setStageSizesFromRootElement(Stage stage)
@@ -142,5 +160,13 @@ public class FxUtils
                 scene.setCursor(cursor);
             }
         });
+    }
+
+    public static void setZeroAnchorPaneConstrains(Node node)
+    {
+        AnchorPane.setTopAnchor(node, 0D);
+        AnchorPane.setRightAnchor(node, 0D);
+        AnchorPane.setBottomAnchor(node, 0D);
+        AnchorPane.setLeftAnchor(node, 0D);
     }
 }
