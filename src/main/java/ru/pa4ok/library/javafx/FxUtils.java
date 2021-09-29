@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.pa4ok.library.util.OtherUtils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +23,26 @@ public class FxUtils
 {
     private static final Logger logger = LogManager.getLogger(FxUtils.class);
 
-    public static void loadFxmlAndController(Parent parent, String resourcePath)
+    public static void loadFxmlAndController(Parent parent, String resourcePath, String resourceName)
     {
         long startMills = System.currentTimeMillis();
 
-        FXMLLoader loader = new FXMLLoader(FxUtils.class.getClassLoader().getResource("fxml/" + resourcePath + parent.getClass().getSimpleName() + ".fxml"));
+        FXMLLoader loader = new FXMLLoader(FxUtils.class.getClassLoader().getResource("fxml/" + resourcePath + resourceName + ".fxml"));
         loader.setRoot(parent);
         loader.setController(parent);
 
         try {
             loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException("Error while loading FXML & set up controller", e);
-        }
-
-        if(parent instanceof MenuForm) {
-            ((MenuForm)parent).initMenu();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while loading FXML & set up controller: " + parent.getClass().getName() + " " + resourcePath + " " + resourceName, e);
         }
 
         logger.debug("Form '" + parent.getClass().getSimpleName() + "' loaded by " + (System.currentTimeMillis() - startMills) + "ms");
+    }
+
+    public static void loadFxmlAndController(Parent parent, String resourcePath)
+    {
+        loadFxmlAndController(parent, resourcePath, parent.getClass().getSimpleName());
     }
 
     public static void loadFxmlAndController(Parent parent)

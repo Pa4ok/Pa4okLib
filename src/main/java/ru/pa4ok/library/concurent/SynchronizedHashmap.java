@@ -1,4 +1,4 @@
-package rip.ethereal.generator.util.synchronize;
+package ru.pa4ok.library.concurent;
 
 import java.util.HashMap;
 
