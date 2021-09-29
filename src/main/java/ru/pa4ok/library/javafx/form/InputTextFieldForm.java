@@ -5,19 +5,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import ru.pa4ok.library.javafx.FxUtils;
-import ru.pa4ok.library.util.DataFilter;
+
+import java.util.function.Predicate;
 
 public class InputTextFieldForm extends GridPane
 {
+    private Predicate<String> filter;
+
     @FXML
     private Label inputFieldName;
 
     @FXML
     private TextField inputField;
 
-    private DataFilter<String> filter;
-
-    public InputTextFieldForm(String fieldName, DataFilter<String> filter)
+    public InputTextFieldForm(String fieldName, Predicate<String> filter)
     {
         FxUtils.loadFxmlAndController(this);
 
@@ -36,14 +37,14 @@ public class InputTextFieldForm extends GridPane
 
     public boolean checkFilter()
     {
-        return filter == null ? true : filter.filter(inputField.getText());
+        return filter == null || filter.test(inputField.getText());
     }
 
-    public DataFilter<String> getFilter() {
+    public Predicate<String> getFilter() {
         return filter;
     }
 
-    public void setFilter(DataFilter<String> filter) {
+    public void setFilter(Predicate<String> filter) {
         this.filter = filter;
     }
 
