@@ -3,6 +3,11 @@ package ru.pa4ok.library.javafx;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Window;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class DialogUtil
 {
@@ -87,15 +92,45 @@ public class DialogUtil
         alert.setHeaderText(headerText);
         alert.setContentText(text);
 
-        ButtonType result = alert.showAndWait().get();
-        if(result == ButtonType.APPLY || result == ButtonType.OK || result == ButtonType.YES) {
-            return true;
+        Window window = alert.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+
+        Optional<ButtonType> optional = alert.showAndWait();
+        if(!optional.isPresent()) {
+            return false;
         }
-        return false;
+
+        ButtonType result = optional.get();
+        return result == ButtonType.APPLY || result == ButtonType.OK || result == ButtonType.YES;
     }
 
     public static boolean showConfirm(String text) {
         return showConfirm(null, text);
     }
 
+    public static String showSelect(String headerText, String text, List<String> items)
+    {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Выберите действие");
+        alert.setHeaderText(headerText);
+        alert.setContentText(text);
+
+        System.out.println(alert.getButtonTypes());
+        alert.getButtonTypes().clear();
+        items.forEach(i -> {
+            ButtonType button = new ButtonType(i);
+            alert.getButtonTypes().add(button);
+        });
+
+        Window window = alert.getDialogPane().getScene().getWindow();
+        window.setOnCloseRequest(event -> window.hide());
+
+        Optional<ButtonType> option = alert.showAndWait();
+        return option.map(ButtonType::getText).orElse(null);
+    }
+
+    public static String showSelect(String headerText, String text, String[] items)
+    {
+        return showSelect(headerText, text, Arrays.asList(items));
+    }
 }
