@@ -114,8 +114,7 @@ public class DialogUtil
         alert.setTitle("Выберите действие");
         alert.setHeaderText(headerText);
         alert.setContentText(text);
-
-        System.out.println(alert.getButtonTypes());
+        
         alert.getButtonTypes().clear();
         items.forEach(i -> {
             ButtonType button = new ButtonType(i);
