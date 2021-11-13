@@ -26,4 +26,14 @@ public class OtherUtils
             return null;
         }
     }
+
+    public static boolean detectIdea()
+    {
+        try {
+            Class.forName("com.intellij.rt.execution.application.AppMainV2");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

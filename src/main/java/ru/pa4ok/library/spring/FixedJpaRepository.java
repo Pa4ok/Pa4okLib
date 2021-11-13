@@ -12,15 +12,12 @@ public interface FixedJpaRepository<T> extends JpaRepository<T, Long>
     public default T getById(long id)
     {
         Optional<T> optional = this.findById(id);
-        if(optional.isPresent()) {
-            return optional.get();
-        }
-        return null;
+        return optional.orElse(null);
     }
 
     public default List<T> getAll()
     {
-        return (List<T>)this.findAll();
+        return this.findAll();
     }
 
     public default T getByIdOrAdd(long id, T object)

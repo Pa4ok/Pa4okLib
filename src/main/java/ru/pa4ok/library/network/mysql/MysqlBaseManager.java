@@ -1,17 +1,17 @@
 package ru.pa4ok.library.network.mysql;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class BaseManager
+@Getter
+@AllArgsConstructor
+public abstract class MysqlBaseManager
 {
     protected final MysqlDatabase database;
-
-    public BaseManager(MysqlDatabase database)
-    {
-        this.database = database;
-    }
 
     public int createTable(String tableName, String fields) throws SQLException
     {
@@ -33,9 +33,5 @@ public abstract class BaseManager
 
             return s.executeUpdate(sql);
         }
-    }
-
-    public MysqlDatabase getDatabase() {
-        return database;
     }
 }

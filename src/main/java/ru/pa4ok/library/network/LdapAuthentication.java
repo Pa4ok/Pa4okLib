@@ -6,24 +6,25 @@ import java.io.InputStreamReader;
 /**
  * я ебал меня сосали
  * убил 3 дня на попытки разобраться с ебучей авторизацией по ldap
- * которая не работает толи из-за уебищности, то ли из-за самоподписанных сертификатов
+ * которая не работает то ли из-за уебищности, то ли из-за самоподписанных сертификатов
  * высрал эту хуйню работающую через powershell
  * спасибо, что хоть так сработало...
  */
 public class LdapAuthentication
 {
-    private static final boolean DEBUG_HUETA = true;
+    private static final boolean LOCAL_DEBUG = false;
 
-    public static boolean authenticate(String username, String password) throws Exception
+    public static boolean authenticate(String username, String password)
     {
+        String command = "powershell.exe ";
         try {
             String script = "(new-object directoryservices.directoryentry '','%username%','%password%').psbase.name -ne $null";
             script = script.replace("%username%", username);
             script = script.replace("%password%", password);
 
-            String command = "powershell.exe " + script;
-            if(DEBUG_HUETA) {
-                System.out.println("Executing process: " + command);
+            command += script;
+            if(LOCAL_DEBUG) {
+                System.out.println("Executing process: " + command.replace(password, "***qwerty***"));
             }
             Process powerShellProcess = Runtime.getRuntime().exec(command);
             powerShellProcess.getOutputStream().close();
@@ -41,6 +42,7 @@ public class LdapAuthentication
             }
 
             try(BufferedReader reader = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()))) {
+                System.out.println("Executed command: " + command);
                 while ((line = reader.readLine()) != null) {
                     System.out.println("###LDAP_AUTH_ERROR### " + line);
                 }

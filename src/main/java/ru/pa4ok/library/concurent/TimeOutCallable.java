@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public interface TimeOutCallable<T> extends Callable<T>
 {
-    public long getTimeout();
+    long getTimeout();
 
-    public TimeUnit getTimeUnit();
+    TimeUnit getTimeUnit();
 }

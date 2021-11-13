@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public interface TimeOutRunnable extends Runnable
 {
-    public long getTimeout();
+    long getTimeout();
 
-    public TimeUnit getTimeUnit();
+    TimeUnit getTimeUnit();
 }
 
