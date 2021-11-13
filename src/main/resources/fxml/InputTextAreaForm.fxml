@@ -10,14 +10,14 @@
 
 <fx:root minHeight="120.0" minWidth="320.0" prefHeight="120.0" prefWidth="450.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints fx:id="leftColumnConstraints" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+    <ColumnConstraints fx:id="rightColumnConstraints" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="inputFieldName" alignment="CENTER" contentDisplay="CENTER" prefWidth="10000.0" text="Название поля" textAlignment="CENTER">
+      <Label fx:id="inputFieldName" alignment="CENTER" contentDisplay="CENTER" text="Название поля" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>

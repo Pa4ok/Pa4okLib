@@ -3,26 +3,37 @@ package ru.pa4ok.library.javafx.form;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import lombok.Getter;
 import ru.pa4ok.library.javafx.FxUtils;
 
 import java.util.List;
 
+@Getter
 public class InputListChoiceForm<T> extends GridPane
 {
-    @FXML
-    private Label inputFieldName;
+    protected List<T> choices;
 
     @FXML
-    private ComboBox<T> choiceField;
+    protected Label inputFieldName;
 
-    private List<T> choices;
+    @FXML
+    protected ComboBox<T> choiceField;
+
+    @FXML
+    protected ColumnConstraints leftColumnConstraints;
+
+    @FXML
+    protected ColumnConstraints rightColumnConstraints;
+
 
     public InputListChoiceForm(String inputFieldName, List<T> choices)
     {
         this.choices = choices;
 
-        FxUtils.loadFxmlAndController(this);
+        FxUtils.loadFxmlAndController(this, "util/");
 
         this.inputFieldName.setText(inputFieldName);
         choiceField.getItems().addAll(this.choices);
@@ -33,15 +44,7 @@ public class InputListChoiceForm<T> extends GridPane
         return choiceField.getValue();
     }
 
-    public ComboBox<T> getChoiceField() {
-        return choiceField;
-    }
-
-    public List<T> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(List<T> choices) {
-        this.choices = choices;
+    public SelectionModel<T> getSelectionModel() {
+        return choiceField.getSelectionModel();
     }
 }

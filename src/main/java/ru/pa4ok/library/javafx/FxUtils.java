@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -168,5 +169,30 @@ public class FxUtils
         AnchorPane.setRightAnchor(node, 0D);
         AnchorPane.setBottomAnchor(node, 0D);
         AnchorPane.setLeftAnchor(node, 0D);
+    }
+
+    public static void setAllSizes(Region region, double width, double height)
+    {
+        region.setMinWidth(width);
+        region.setPrefWidth(width);
+        region.setMaxWidth(width);
+
+        region.setMinHeight(height);
+        region.setPrefHeight(height);
+        region.setMaxHeight(height);
+    }
+
+    public static void setAllWidths(Region region, double width)
+    {
+        region.setMinWidth(width);
+        region.setPrefWidth(width);
+        region.setMaxWidth(width);
+    }
+
+    public static void setAllHeights(Region region, double height)
+    {
+        region.setMinHeight(height);
+        region.setPrefHeight(height);
+        region.setMaxHeight(height);
     }
 }

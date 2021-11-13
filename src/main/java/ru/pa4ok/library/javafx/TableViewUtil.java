@@ -1,6 +1,7 @@
-package ru.pa4ok.library.javafx;
+package ru.pa4ok.library.javafx ;
 
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.ClipboardContent;
@@ -10,14 +11,14 @@ import javafx.scene.input.TransferMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class TableViewUtil
 {
     private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
-    public static <T> void setDraggableRowFactory(TableView<T> table, Predicate<T> setRowIndexFunction, Consumer<List<T>> updateAllRowsFunction)
+    public static <T> void setDraggableRowFactory(TableView<T> table, BiPredicate<T, Integer> setRowIndexFunction, Consumer<List<T>> updateAllRowsFunction)
     {
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -29,7 +30,7 @@ public class TableViewUtil
             TableRow<T> row = new TableRow<>();
 
             row.setOnDragDetected(event -> {
-                if (!row.isEmpty()) {
+                if (! row.isEmpty()) {
                     Integer index = row.getIndex();
                     Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
                     db.setDragView(row.snapshot(null, null));
@@ -66,9 +67,9 @@ public class TableViewUtil
                     table.getItems().add(dropIndex, draggedElement);
                     if(updateIndex) {
                         List<T> updateList = new ArrayList<>();
-                        for(int i=dropIndex; i<table.getItems().size(); i++) {
+                        for(int i=0; i<table.getItems().size(); i++) {
                             T item = table.getItems().get(i);
-                            if(setRowIndexFunction.test(item) && updateAll) {
+                            if(setRowIndexFunction.test(item, i) && updateAll) {
                                 updateList.add(item);
                             }
                         }
@@ -87,12 +88,17 @@ public class TableViewUtil
         });
     }
 
+    public static <T> void setDraggableRowFactory(TableView<T> table, BiPredicate<T, Integer> setRowIndexFunction)
+    {
+        setDraggableRowFactory(table, setRowIndexFunction, null);
+    }
+
     public static <T> void setDraggableRowFactory(TableView<T> table)
     {
         setDraggableRowFactory(table, null, null);
     }
 
-    public static <T> void setMultiRowDraggableRowFactory(TableView<T> table, Predicate<T> setRowIndexFunction, Consumer<List<T>> updateAllRowsFunction)
+    public static <T> void setMultiRowDraggableRowFactory(TableView<T> table, BiPredicate<T, Integer> setRowIndexFunction, Consumer<List<T>> updateAllRowsFunction)
     {
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -167,7 +173,6 @@ public class TableViewUtil
                         dropIndex=table.getItems().size();
                     }
 
-                    int startDropIndex = dropIndex;
                     table.getSelectionModel().clearSelection();
                     for(T t : selections) {
                         table.getItems().add(dropIndex, t);
@@ -175,11 +180,11 @@ public class TableViewUtil
                         dropIndex++;
                     }
 
-                    if(updateIndex && startDropIndex != dropIndex) {
+                    if(updateIndex) {
                         List<T> updateList = new ArrayList<>();
-                        for(int i=startDropIndex; i<table.getItems().size(); i++) {
+                        for(int i=0; i<table.getItems().size(); i++) {
                             item = table.getItems().get(i);
-                            if(setRowIndexFunction.test(item) && updateAll) {
+                            if(setRowIndexFunction.test(item, i) && updateAll) {
                                 updateList.add(item);
                             }
                         }
@@ -198,8 +203,24 @@ public class TableViewUtil
         });
     }
 
+    public static <T> void setMultiRowDraggableRowFactory(TableView<T> table, BiPredicate<T, Integer> setRowIndexFunction)
+    {
+        setMultiRowDraggableRowFactory(table, setRowIndexFunction, null);
+    }
+
     public static <T> void setMultiRowDraggableRowFactory(TableView<T> table)
     {
         setMultiRowDraggableRowFactory(table, null, null);
+    }
+
+    public static double getAllColumnWidth(TableView<?> table)
+    {
+        double d = 0;
+
+        for(TableColumn<?,?> c : table.getColumns()) {
+            d += c.getWidth();
+        }
+
+        return d;
     }
 }

@@ -3,31 +3,38 @@ package ru.pa4ok.library.javafx.form;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import lombok.Getter;
+import lombok.Setter;
 import ru.pa4ok.library.javafx.FxUtils;
 
 import java.util.function.Predicate;
 
+@Getter
 public class InputTextFieldForm extends GridPane
 {
-    private Predicate<String> filter;
+    @Setter
+    protected Predicate<String> filter;
 
     @FXML
-    private Label inputFieldName;
+    protected Label inputFieldName;
 
     @FXML
-    private TextField inputField;
+    protected TextField inputField;
+
+    @FXML
+    protected ColumnConstraints leftColumnConstraints;
+
+    @FXML
+    protected ColumnConstraints rightColumnConstraints;
 
     public InputTextFieldForm(String fieldName, Predicate<String> filter)
     {
-        FxUtils.loadFxmlAndController(this);
+        FxUtils.loadFxmlAndController(this, "util/");
 
         this.inputFieldName.setText(fieldName);
         this.filter = filter;
-    }
-
-    public String getInputText() {
-        return inputField.getText();
     }
 
     public InputTextFieldForm(String fieldName)
@@ -35,24 +42,12 @@ public class InputTextFieldForm extends GridPane
         this(fieldName, null);
     }
 
+    public String getInputText() {
+        return inputField.getText();
+    }
+
     public boolean checkFilter()
     {
         return filter == null || filter.test(inputField.getText());
-    }
-
-    public Predicate<String> getFilter() {
-        return filter;
-    }
-
-    public void setFilter(Predicate<String> filter) {
-        this.filter = filter;
-    }
-
-    public Label getInputFieldName() {
-        return inputFieldName;
-    }
-
-    public TextField getInputField() {
-        return inputField;
     }
 }
