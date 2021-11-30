@@ -1,13 +1,12 @@
 package ru.pa4ok.library.javafx ;
 
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,5 +221,26 @@ public class TableViewUtil
         }
 
         return d;
+    }
+
+    public static <T> void initRowNumberColumn(TableColumn<T, T> column)
+    {
+        column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue()));
+        column.setCellFactory(new Callback<TableColumn<T, T>, TableCell<T, T>>() {
+            @Override
+            public TableCell<T, T> call(TableColumn<T, T> param) {
+                return new TableCell<T, T>() {
+                    @Override
+                    protected void updateItem(T item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (this.getTableRow() != null && item != null) {
+                            setText(String.valueOf(this.getTableRow().getIndex() + 1));
+                        } else {
+                            setText("");
+                        }
+                    }
+                };
+            }
+        });
     }
 }
