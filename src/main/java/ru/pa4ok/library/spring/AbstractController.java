@@ -1,14 +1,14 @@
 package ru.pa4ok.library.spring;
 
 import com.google.gson.Gson;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MissingRequestHeaderException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.pa4ok.library.spring.exception.UserAccessDeniedException;
-import ru.pa4ok.library.spring.exception.UserAuthTimeoutException;
-import ru.pa4ok.library.spring.exception.UserBadAuthException;
 import ru.pa4ok.library.util.GsonUtil;
+
+import javax.servlet.ServletContext;
+import java.io.IOException;
 
 public class AbstractController
 {
@@ -34,27 +34,22 @@ public class AbstractController
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
     }
 
-    @ExceptionHandler(UserBadAuthException.class)
-    public ResponseEntity<String> UserBadAuthExceptionHandler(UserBadAuthException e)
-    {
-        return deny();
+    protected ResponseEntity<String> error() {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
-    @ExceptionHandler(UserAccessDeniedException.class)
-    public ResponseEntity<String> UserAccessDeniedExceptionHandler(UserAccessDeniedException e)
+    protected MediaType getMediaType(ServletContext context, Resource resource)
     {
-        return deny();
-    }
+        String contentType = null;
+        try {
+            contentType = context.getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
 
-    @ExceptionHandler(UserAuthTimeoutException.class)
-    public ResponseEntity<String> UserAuthTimeoutExceptionHandler(UserAuthTimeoutException e)
-    {
-        return ResponseEntity.status(600).body(null);
-    }
-
-    @ExceptionHandler(MissingRequestHeaderException.class)
-    public ResponseEntity<String> MissingRequestHeaderExceptionHandler(MissingRequestHeaderException e)
-    {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing user info header");
+        return MediaType.parseMediaType(contentType);
     }
 }
