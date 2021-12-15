@@ -1,12 +1,15 @@
 package ru.pa4ok.library.javafx;
 
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
+import javafx.util.StringConverter;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -152,7 +155,7 @@ public class DialogUtil
         return showButtonSelect(headerText, text, Arrays.asList(items));
     }
 
-    public static <T> T showChoice(String headerText, String text, List<T> items)
+    public static <T> T showChoice(String headerText, String text, List<T> items, StringConverter<T> converter)
     {
         ChoiceDialog<T> choiceDialog = new ChoiceDialog<>(items.get(0), items);
         choiceDialog.setTitle("Выберите элемент");
@@ -160,13 +163,30 @@ public class DialogUtil
         choiceDialog.setContentText(text);
         setOnWindowClosing(choiceDialog);
 
+        if(converter != null) {
+            for(Node n : choiceDialog.getDialogPane().getChildren()) {
+                if(n instanceof Pane) {
+                    for(Node n1 : ((Pane)n).getChildren()) {
+                        if(n1 instanceof ComboBox) {
+                            ((ComboBox)n1).setConverter(converter);
+                        }
+                    }
+                }
+            }
+        }
+
         Optional<T> optional = choiceDialog.showAndWait();
         return optional.orElse(null);
     }
 
+    public static <T> T showChoice(String headerText, String text, List<T> items)
+    {
+        return showChoice(headerText, text, items, null);
+    }
+
     public static <T> T showChoice(String text, List<T> items)
     {
-        return showChoice(null, text, items);
+        return showChoice(null, text, items, null);
     }
     //
 
