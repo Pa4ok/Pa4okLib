@@ -11,6 +11,6 @@ public interface FixedJpaRepository<T> extends JpaRepository<T, Long>
     }
 
     default T findByIdOrAdd(long id, T object) {
-        return findById(id).orElseGet(() -> this.save(object));
+        return findById(id).orElseGet(() -> save(object));
     }
 }
