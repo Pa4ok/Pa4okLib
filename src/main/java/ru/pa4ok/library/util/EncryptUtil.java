@@ -12,12 +12,11 @@ public class EncryptUtil
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger number = new BigInteger(1, messageDigest);
-            String hashtext = number.toString(16);
-            while (hashtext.length() < 32)
-            {
-                hashtext = "0" + hashtext;
+            StringBuilder hashText = new StringBuilder(number.toString(16));
+            while (hashText.length() < 32) {
+                hashText.insert(0, "0");
             }
-            return hashtext;
+            return hashText.toString();
         }
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -32,42 +31,35 @@ public class EncryptUtil
     public static String getEncryptString(final String s)
     {
         final char[] mas = s.toCharArray();
-        for (int i = 0; i < mas.length; ++i) {
-            if (mas[i] >= 'a' && mas[i] <= 'z')
-            {
+
+        for (int i = 0; i < mas.length; ++i)
+        {
+            if (mas[i] >= 'a' && mas[i] <= 'z') {
                 int k = mas[i];
                 k = 122 - (26 - (123 - k));
                 mas[i] = (char)k;
-            }
-            else if (mas[i] >= 'A' && mas[i] <= 'Z')
-            {
+            } else if (mas[i] >= 'A' && mas[i] <= 'Z') {
                 int k = mas[i];
                 k = 90 - (26 - (91 - k));
                 mas[i] = (char)k;
-            }
-            else if (mas[i] >= '0' && mas[i] <= '9')
-            {
+            } else if (mas[i] >= '0' && mas[i] <= '9') {
                 int k = mas[i];
                 k = 57 - (10 - (58 - k));
                 mas[i] = (char)k;
             }
         }
-        for (int i = 0; i < mas.length / 2; ++i)
-        {
+
+        for (int i = 0; i < mas.length / 2; ++i) {
             final char ch = mas[i];
             mas[i] = mas[mas.length - 1 - i];
             mas[mas.length - 1 - i] = ch;
         }
-        String out = "";
-        for (int j = 0; j < mas.length; ++j)
-        {
-            out = String.valueOf(out) + mas[j];
-        }
-        return out;
+
+        return new String(mas);
     }
 
-    public static String encryptPassword(String passworld)
+    public static String encryptPassword(String password)
     {
-        return getMD5(getEncryptString(getMD5(passworld)));
+        return getEncryptString(getMD5(getMD5(password)));
     }
 }
