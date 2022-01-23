@@ -28,9 +28,9 @@ public class EncryptUtil
         return getMD5(getMD5(input));
     }
 
-    public static String getEncryptString(final String s)
+    public static String getEncryptString(String s)
     {
-        final char[] mas = s.toCharArray();
+        char[] mas = s.toCharArray();
 
         for (int i = 0; i < mas.length; ++i)
         {

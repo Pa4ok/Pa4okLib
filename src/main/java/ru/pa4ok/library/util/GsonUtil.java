@@ -12,15 +12,17 @@ import java.lang.annotation.Target;
 
 public class GsonUtil
 {
-	private static final GsonBuilder gsonBuilder;
-
 	public static final Gson gson;
 	public static final Gson gsonPretty;
 
-	static {
-		gsonBuilder = new GsonBuilder();
-		gsonBuilder.serializeNulls();
-		gsonBuilder.setExclusionStrategies(new ExclusionStrategy() {
+	static
+	{
+		GsonBuilder builder = new GsonBuilder();
+
+		builder.serializeNulls();
+		builder.enableComplexMapKeySerialization();
+
+		builder.setExclusionStrategies(new ExclusionStrategy() {
 			@Override
 			public boolean shouldSkipClass(Class<?> clazz) {
 				return false;
@@ -32,8 +34,8 @@ public class GsonUtil
 			}
 		});
 
-		gson = gsonBuilder.create();
-		gsonPretty = gsonBuilder.setPrettyPrinting().create();
+		gson = builder.create();
+		gsonPretty = builder.setPrettyPrinting().create();
 	}
 
 	public static class Jsonable
@@ -52,5 +54,5 @@ public class GsonUtil
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
-	public static @interface Exclude {}
+	public @interface Exclude {}
 }
