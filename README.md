@@ -7,6 +7,7 @@ This library contains various developments that I use in my projects. I would be
 - data workers with gson, regex & my custom filters
 - apache log4j2 logging utilities
 - reflect utils for private & final elements, adding enums
-- windows registry utils
+- fast xorshift random implementation
 - some simple concurrent utils
+- windows registry utils
 - and other...
