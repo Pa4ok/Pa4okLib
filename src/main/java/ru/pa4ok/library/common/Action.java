@@ -1,4 +1,4 @@
-package ru.pa4ok.library.util;
+package ru.pa4ok.library.common;
 
 @FunctionalInterface
 public interface Action

@@ -4,8 +4,8 @@ import javafx.application.Platform;
 import javafx.scene.ImageCursor;
 import org.apache.http.HttpException;
 import org.apache.http.conn.HttpHostConnectException;
-import ru.pa4ok.library.util.Action;
-import ru.pa4ok.library.util.ActionWithException;
+import ru.pa4ok.library.common.Action;
+import ru.pa4ok.library.common.ActionWithException;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;

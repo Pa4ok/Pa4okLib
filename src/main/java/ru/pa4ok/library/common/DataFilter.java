@@ -1,4 +1,4 @@
-package ru.pa4ok.library.util;
+package ru.pa4ok.library.common;
 
 import java.util.function.Predicate;
 
