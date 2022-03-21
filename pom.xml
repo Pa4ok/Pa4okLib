@@ -11,8 +11,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>ru.pa4ok</groupId>
-    <artifactId>library</artifactId>
+    <groupId>ru.pa4ok.library</groupId>
+    <artifactId>Pa4okLib</artifactId>
     <version>1.0</version>
 
     <build>
