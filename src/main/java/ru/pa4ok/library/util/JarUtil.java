@@ -20,7 +20,7 @@ import java.util.zip.ZipFile;
 
 public class JarUtil
 {
-    public static List<String> readAllLines(String fileName, Class<?> jarCls) throws IOException, URISyntaxException, NullPointerException
+    public static List<String> readAllLines(String fileName, Class<?> jarCls) throws Exception
     {
             URI uri = jarCls.getClassLoader().getResource(fileName).toURI();
             if("jar".equals(uri.getScheme())){
@@ -42,11 +42,12 @@ public class JarUtil
         return Toolkit.getDefaultToolkit().getImage(JarUtil.class.getClassLoader().getResource(path));
     }
 
-    public static Font getFont(String path) throws IOException, FontFormatException {
+    public static Font getFont(String path) throws Exception {
         return Font.createFont(Font.TRUETYPE_FONT, JarUtil.class.getClassLoader().getResourceAsStream(path));
     }
 
-    public static void extractFromClasspath(String source, String destination) throws IOException {
+    public static void extractFromClasspath(String source, String destination) throws IOException
+    {
         new File(destination).mkdirs();
 
         final URL dirURL = JarUtil.class.getResource(source);
@@ -82,7 +83,7 @@ public class JarUtil
             } else {
                 final InputStream inputStream = jar.getInputStream(entry);
                 final OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file));
-                final byte buffer[] = new byte[4096];
+                final byte[] buffer = new byte[4096];
 
                 int readCount;
                 while ((readCount = inputStream.read(buffer)) > 0) {

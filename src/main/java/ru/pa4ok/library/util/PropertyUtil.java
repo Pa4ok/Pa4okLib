@@ -12,7 +12,8 @@ import java.util.Properties;
 public class PropertyUtil {
     private static final Logger logger = LogManager.getLogger(PropertyUtil.class);
 
-    public static Properties loadFromJar(String path, String title) {
+    public static Properties loadFromJar(String path, String title)
+    {
         Properties props = new Properties();
 
         try {

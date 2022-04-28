@@ -4,11 +4,10 @@ public class OtherUtils
 {
     public static final String DEPRECATED_ELEMENT = "|DEPRECATED|";
 
-    public static void safeSleep(long ms) {
+    public static void uncheckedSleep(long ms) {
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
         }
     }
 
