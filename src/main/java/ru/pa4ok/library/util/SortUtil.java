@@ -1,5 +1,6 @@
 package ru.pa4ok.library.util;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class SortUtil
 {
     public static <E extends Comparable> void bubble(E[] array)
@@ -13,7 +14,7 @@ public class SortUtil
 
             for (int i = 0; i < array.length - 1; i++)
             {
-                if (array[i].compareTo(array[i+1]) == 1)
+                if (array[i].compareTo(array[i + 1]) > 0)
                 {
                     temp = array[i];
                     array[i] = array[i+1];
@@ -57,12 +58,12 @@ public class SortUtil
         int rightChild = 2*i+2;
         int largest = i;
 
-        if (leftChild < length && array[leftChild].compareTo(array[largest]) == 1)
+        if (leftChild < length && array[leftChild].compareTo(array[largest]) > 0)
         {
             largest = leftChild;
         }
 
-        if (rightChild < length && array[rightChild].compareTo(array[largest]) == 1)
+        if (rightChild < length && array[rightChild].compareTo(array[largest]) > 0)
         {
             largest = rightChild;
         }
@@ -90,7 +91,7 @@ public class SortUtil
             E current = array[i];
             int j = i - 1;
 
-            while(j >= 0 && current.compareTo(array[j]) == -1)
+            while(j >= 0 && current.compareTo(array[j]) < 0)
             {
                 array[j+1] = array[j];
                 j--;
@@ -127,8 +128,8 @@ public class SortUtil
     {
         int lengthLeft = mid - left + 1;
         int lengthRight = right - mid;
-        E leftArray[] = (E[])new Comparable[lengthLeft];
-        E rightArray[] = (E[])new Comparable[lengthRight];
+        E[] leftArray = (E[])new Comparable[lengthLeft];
+        E[] rightArray = (E[])new Comparable[lengthRight];
 
         for (int i = 0; i < lengthLeft; i++)
         {
@@ -146,7 +147,7 @@ public class SortUtil
         {
             if (leftIndex < lengthLeft && rightIndex < lengthRight)
             {
-                if (leftArray[leftIndex].compareTo(rightArray[rightIndex]) == -1)
+                if (leftArray[leftIndex].compareTo(rightArray[rightIndex]) < 0)
                 {
                     array[i] = leftArray[leftIndex];
                     leftIndex++;
@@ -194,12 +195,11 @@ public class SortUtil
 
     private static <E extends Comparable> int partition(E[] array, int begin, int end)
     {
-        int pivot = end;
         int counter = begin;
 
         for (int i = begin; i < end; i++)
         {
-            if (array[i].compareTo(array[pivot]) == -1)
+            if (array[i].compareTo(array[end]) < 0)
             {
                 E temp = array[counter];
                 array[counter] = array[i];
@@ -208,8 +208,8 @@ public class SortUtil
             }
         }
 
-        E temp = array[pivot];
-        array[pivot] = array[counter];
+        E temp = array[end];
+        array[end] = array[counter];
         array[counter] = temp;
 
         return counter;
@@ -231,7 +231,7 @@ public class SortUtil
             int minId = i;
             for (int j = i+1; j < array.length; j++)
             {
-                if (array[j].compareTo(min) == -1)
+                if (array[j].compareTo(min) < 0)
                 {
                     min = array[j];
                     minId = j;
