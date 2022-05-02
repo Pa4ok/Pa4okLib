@@ -1,5 +1,7 @@
 package ru.pa4ok.library.swing.jtable;
 
+import lombok.Getter;
+
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -8,9 +10,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+@Getter
 public class ExtendedTableModel<T> extends AbstractTableModel
 {
-    private Class<T> cls;
+    private final Class<T> cls;
     private String[] columnNames;
 
     private List<T> allRows = new ArrayList<>();
@@ -77,25 +80,9 @@ public class ExtendedTableModel<T> extends AbstractTableModel
         }
     }
 
-    public List<T> getAllRows() {
-        return allRows;
-    }
-
     public void setAllRows(List<T> allRows) {
         this.allRows = allRows;
         this.updateFilteredRows();
-    }
-
-    public List<T> getFilteredRows() {
-        return filteredRows;
-    }
-
-    public Predicate<T>[] getFilters() {
-        return filters;
-    }
-
-    public Comparator<T> getSorter() {
-        return sorter;
     }
 
     public void setSorter(Comparator<T> sorter) {

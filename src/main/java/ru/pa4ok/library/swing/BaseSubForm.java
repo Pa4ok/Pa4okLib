@@ -1,4 +1,4 @@
-package ru.pa4ok.library.swing.form;
+package ru.pa4ok.library.swing;
 
 import javax.swing.JFrame;
 import java.awt.event.WindowAdapter;

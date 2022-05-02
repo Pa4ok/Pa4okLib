@@ -1,23 +1,19 @@
 package ru.pa4ok.library.swing.jtable;
 
+import lombok.AllArgsConstructor;
+
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@AllArgsConstructor
 public class CustomTableModel<T> extends AbstractTableModel
 {
     private final Class<T> cls;
     private final String[] columnNames;
     private List<T> rows;
-
-    public CustomTableModel(Class<T> cls, String[] columnNames, List<T> rows)
-    {
-        this.cls = cls;
-        this.columnNames = columnNames;
-        this.rows = rows;
-    }
 
     @Override
     public int getRowCount() {
@@ -63,5 +59,6 @@ public class CustomTableModel<T> extends AbstractTableModel
 
     public void setRows(List<T> rows) {
         this.rows = rows;
+        this.fireTableDataChanged();
     }
 }
