@@ -4,6 +4,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class HiddenFloat
 {
+    public static final float MAX_DIF = 0.001F;
+
     private boolean minus;
     private float[] parts;
 
@@ -43,5 +45,14 @@ public class HiddenFloat
         }
 
         return original;
+    }
+
+    public boolean checkDecimal(float actual)
+    {
+        float hidden = this.get();
+        if(actual != hidden) {
+            return !(Math.abs(actual - hidden) > MAX_DIF);
+        }
+        return true;
     }
 }

@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Modified class from MinecrafForge 1.7.10
  */
-public class EnumHelper
+public class ReflectEnumHelper
 {
     private static Object reflectionFactory = null;
     private static Method newConstructorAccessor = null;

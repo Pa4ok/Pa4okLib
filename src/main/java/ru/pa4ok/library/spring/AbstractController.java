@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class AbstractController
 {
-    protected final Gson gson = GsonUtil.gson;
-    protected final Gson gsonPretty = GsonUtil.gsonPretty;
+    protected final Gson gson = GsonUtil.GSON;
+    protected final Gson gsonPretty = GsonUtil.GSON_PRETTY;
 
     protected ResponseEntity<String> okJson(Object o)
     {

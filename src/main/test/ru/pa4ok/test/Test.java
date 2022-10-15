@@ -1,10 +1,13 @@
 package ru.pa4ok.test;
 
+import lombok.SneakyThrows;
+
 public class Test
 {
+    @SneakyThrows
     public static void main(String[] args)
     {
-        System.out.println(228);
+        System.out.println("test");
     }
 }
 

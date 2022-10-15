@@ -32,7 +32,7 @@ public class HttpClientUtil
 {
     private static final Logger logger = LogManager.getLogger(HttpClientUtil.class);
 
-    private static final Gson GSON = GsonUtil.gson;
+    private static final Gson GSON = GsonUtil.GSON;
     private static final CloseableHttpClient DEFAULT_HTTP_CLIENT = HttpClients.createDefault();
 
     public static HttpPost createPost(String url, List<Tuple<String, String>> headers)

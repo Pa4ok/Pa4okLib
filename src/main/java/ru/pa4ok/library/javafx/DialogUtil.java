@@ -49,7 +49,7 @@ public class DialogUtil
         showAlert(Alert.AlertType.ERROR, "Ошибка", null, text);
     }
 
-    public static void showError(String headerText, Exception error)
+    public static void showError(String headerText, Throwable error)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка");
@@ -237,3 +237,4 @@ public class DialogUtil
     }
     //
 }
+
