@@ -16,6 +16,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -29,6 +30,7 @@ public class AsyncFxTask<T> extends Task<T>
 {
     private static final ExecutorService SINGLE_EXECUTOR = Executors.newSingleThreadExecutor(ConcurrentUtil.FIXED_THREAD_FACTORY);
     private static final ExecutorService MULTIPLE_EXECUTOR = Executors.newFixedThreadPool(4, ConcurrentUtil.FIXED_THREAD_FACTORY);
+    private static final AtomicInteger SINGLE_EXECUTOR_COUNTER = new AtomicInteger();
     private static final Lock SINGLE_EXECUTOR_LOCK = new ReentrantLock();
 
     private final Callable<T> callable;
@@ -80,21 +82,19 @@ public class AsyncFxTask<T> extends Task<T>
         if(!this.started.getAndSet(true))
         {
             if(this.single) {
-                if(rejectIfBusy) {
-                    if(SINGLE_EXECUTOR_LOCK.tryLock()) {
-                        try {
+                SINGLE_EXECUTOR_LOCK.lock();
+                try {
+                    if(rejectIfBusy) {
+                        if(SINGLE_EXECUTOR_COUNTER.get() == 0) {
+                            SINGLE_EXECUTOR_COUNTER.incrementAndGet();
                             SINGLE_EXECUTOR.submit(this);
-                        } finally {
-                            SINGLE_EXECUTOR_LOCK.unlock();
                         }
-                    }
-                } else {
-                    SINGLE_EXECUTOR_LOCK.lock();
-                    try {
+                    } else {
+                        SINGLE_EXECUTOR_COUNTER.incrementAndGet();
                         SINGLE_EXECUTOR.submit(this);
-                    } finally {
-                        SINGLE_EXECUTOR_LOCK.unlock();
                     }
+                } finally {
+                    SINGLE_EXECUTOR_LOCK.unlock();
                 }
             } else {
                 MULTIPLE_EXECUTOR.submit(this);
@@ -118,6 +118,7 @@ public class AsyncFxTask<T> extends Task<T>
         }
 
         this.result = this.callable.call();
+
         if(this.onFinish != null) {
             this.runSyncPlatformAction(this.onFinish);
         }
@@ -128,61 +129,80 @@ public class AsyncFxTask<T> extends Task<T>
     @Override
     protected void succeeded()
     {
-        if(this.cursorWait) {
-            FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
+        try {
+            if(this.cursorWait) {
+                FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
+            }
+
+            if(this.resultConsumer != null) {
+                this.resultConsumer.accept(this.result);
+            }
+        } finally {
+            if(this.single) {
+                SINGLE_EXECUTOR_COUNTER.decrementAndGet();
+            }
         }
 
-        if(this.resultConsumer != null) {
-            this.resultConsumer.accept(this.result);
-        }
     }
 
     @Override
     protected void cancelled()
     {
-        if(this.cursorWait) {
-            FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
+        try {
+            if(this.cursorWait) {
+                FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
+            }
+        } finally {
+            if(this.single) {
+                SINGLE_EXECUTOR_COUNTER.decrementAndGet();
+            }
         }
     }
 
     @Override
     protected void failed()
     {
-        if(this.cursorWait) {
-            FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
-        }
-
-        Throwable error = getException();
-        String message = "Ошибка выполнения задачи " + this.getClass();
-
-        if(error != null)
-        {
-            Throwable cause = error.getCause();
-
-            if(error instanceof DialogException) {
-                if(cause != null) {
-                    DialogUtil.showError(error.getMessage(), cause);
-                } else {
-                    DialogUtil.showError(error.getMessage());
-                }
-                return;
+        try {
+            if(this.cursorWait) {
+                FxUtils.changeCursorOnAllStages(ImageCursor.DEFAULT);
             }
 
-            if(error instanceof HttpException) {
-                if(cause != null && error.getCause() instanceof HttpHostConnectException) {
-                    message = "Отстутствует подключение к серверу";
-                } else if(error.getMessage().startsWith("403")) {
-                    message = "Ошибка доступа (403)";
-                } else {
-                    message = "Ошибка получения данных с сервера: " + error.getMessage();
-                }
-            }
+            Throwable error = getException();
+            String message = "Ошибка выполнения задачи " + this.getClass();
 
-            DialogUtil.showError(message, error);
-        }
-        else
-        {
-            DialogUtil.showError(message);
+            if(error != null)
+            {
+                Throwable cause = error.getCause();
+
+                if(error instanceof DialogException) {
+                    if(cause != null) {
+                        DialogUtil.showError(error.getMessage(), cause);
+                    } else {
+                        DialogUtil.showError(error.getMessage());
+                    }
+                    return;
+                }
+
+                if(error instanceof HttpException) {
+                    if(cause != null && error.getCause() instanceof HttpHostConnectException) {
+                        message = "Отстутствует подключение к серверу";
+                    } else if(error.getMessage().startsWith("403")) {
+                        message = "Ошибка доступа (403)";
+                    } else {
+                        message = "Ошибка получения данных с сервера: " + error.getMessage();
+                    }
+                }
+
+                DialogUtil.showError(message, error);
+            }
+            else
+            {
+                DialogUtil.showError(message);
+            }
+        } finally {
+            if(this.single) {
+                SINGLE_EXECUTOR_COUNTER.decrementAndGet();
+            }
         }
     }
 
