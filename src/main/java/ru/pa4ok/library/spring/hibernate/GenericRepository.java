@@ -1,4 +1,4 @@
-package ru.pa4ok.library.spring;
+package ru.pa4ok.library.spring.hibernate;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

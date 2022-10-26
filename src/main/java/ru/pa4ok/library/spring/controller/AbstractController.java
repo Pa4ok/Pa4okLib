@@ -1,4 +1,4 @@
-package ru.pa4ok.library.spring;
+package ru.pa4ok.library.spring.controller;
 
 import com.google.gson.Gson;
 import org.springframework.core.io.Resource;

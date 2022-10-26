@@ -1,10 +1,10 @@
-package ru.pa4ok.library.spring;
+package ru.pa4ok.library.spring.hibernate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface FixedJpaRepository<T> extends JpaRepository<T, Long>
+public interface DefaultRepository<T> extends JpaRepository<T, Long>
 {
     default T findByIdOrNull(long id) {
         return findById(id).orElse(null);
