@@ -1,13 +1,14 @@
 # Pa4okLib
-This library contains various developments that I use in my projects. I would be glad if some of this is useful to someone
+This library contains various utilities that I use in my projects
 - mysql connector & it's default connection pool
-- spring & hibernate (data jpa)
-- ui frameworks (swing и javafx)
-- network utilities based on apache http client
-- data workers with gson, regex & my custom filters
-- apache log4j2 logging utilities
-- reflect utils for private & final elements, adding enums
+- spring & hibernate utils
+- swing & javafx utils
+- apache HttpClient implementation for simple json requests
+- data utils including gson, regex & my custom filters
+- reflect utils for hidden elements & runtime adding enums
 - fast xorshift random implementation
-- some simple concurrent utils
+- simple concurrent utils
 - windows registry utils
-- and other...
+- hidden value containers for primitives
+- exception checked functional interfaces
+- and many other
