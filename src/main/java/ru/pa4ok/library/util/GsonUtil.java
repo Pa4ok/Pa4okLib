@@ -1,9 +1,6 @@
 package ru.pa4ok.library.util;
 
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -47,6 +44,11 @@ public class GsonUtil
 				.enableComplexMapKeySerialization()
 				.setPrettyPrinting();
 		GSON_PRETTY = PRETTY_BUILDER.create();
+	}
+
+	public static String format(String json)
+	{
+		return GSON_PRETTY.toJson(JsonParser.parseString(json));
 	}
 
 	public static class Jsonable
