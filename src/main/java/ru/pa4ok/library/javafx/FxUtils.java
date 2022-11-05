@@ -24,6 +24,18 @@ public class FxUtils
 {
     private static final Logger logger = LogManager.getLogger(FxUtils.class);
 
+    public static void initErrorHandling()
+    {
+        if(!Platform.isFxApplicationThread()) {
+            throw new IllegalStateException("Error handling must init from FX thread");
+        }
+
+        Thread.setDefaultUncaughtExceptionHandler((t,e) -> {
+            logger.error(e);
+            DialogUtil.showErrorLater("Ошибка в работе приложения", e);
+        });
+    }
+
     public static void loadFxmlAndController(Parent parent, String resourcePath, String resourceName)
     {
         long startMills = System.currentTimeMillis();

@@ -22,9 +22,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/**
- * класс утилита
- */
 @Getter
 public class AsyncFxTask<T> extends Task<T>
 {

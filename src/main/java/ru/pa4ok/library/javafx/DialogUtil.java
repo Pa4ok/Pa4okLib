@@ -22,7 +22,6 @@ import java.util.Optional;
 
 public class DialogUtil
 {
-    //private main
     private static void showAlert(Alert.AlertType type, String title, String headerText, String text)
     {
         Alert alert = new Alert(type);
@@ -32,13 +31,12 @@ public class DialogUtil
         alert.showAndWait();
     }
 
-    private static void setOnWindowClosing(Dialog<?> dialog) {
+    private static void setOnWindowClosing(Dialog<?> dialog)
+    {
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
     }
-    //
 
-    //public main
     public static void showError(String headerText, String text)
     {
         showAlert(Alert.AlertType.ERROR, "Ошибка", headerText, text);
@@ -86,7 +84,7 @@ public class DialogUtil
         }
     }
 
-    public static void showError(Exception error)
+    public static void showError(Throwable error)
     {
         showError(error.getMessage(), error);
     }
@@ -188,9 +186,7 @@ public class DialogUtil
     {
         return showChoice(null, text, items, null);
     }
-    //
 
-    //show later
     private static void showAlertLater(Alert.AlertType type, String title, String headerText, String text)
     {
         Platform.runLater(() -> showAlert(type, title, headerText, text));
@@ -206,12 +202,12 @@ public class DialogUtil
         showAlertLater(Alert.AlertType.ERROR, "Ошибка", null, text);
     }
 
-    public static void showErrorLater(String headerText, Exception error)
+    public static void showErrorLater(String headerText, Throwable error)
     {
         Platform.runLater(() -> showError(headerText, error));
     }
 
-    public static void showErrorLater(Exception error)
+    public static void showErrorLater(Throwable error)
     {
         Platform.runLater(() -> showError(error));
     }
@@ -235,6 +231,5 @@ public class DialogUtil
     {
         showAlertLater(Alert.AlertType.INFORMATION, "Информация", null, text);
     }
-    //
 }
 
