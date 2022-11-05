@@ -1,7 +1,8 @@
-package ru.pa4ok.library.spring.hibernate;
+package ru.pa4ok.library.spring.hibernate.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.pa4ok.library.spring.controller.NotFoundException;
+import ru.pa4ok.library.spring.hibernate.repository.DefaultRepository;
 
 import java.util.List;
 import java.util.Optional;

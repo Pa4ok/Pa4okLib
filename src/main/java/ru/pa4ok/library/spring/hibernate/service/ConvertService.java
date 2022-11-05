@@ -1,4 +1,4 @@
-package ru.pa4ok.library.spring.hibernate;
+package ru.pa4ok.library.spring.hibernate.service;
 
 import org.springframework.transaction.annotation.Transactional;
 

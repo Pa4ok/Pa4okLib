@@ -170,6 +170,7 @@ public class JsonHttpClient implements Closeable
         {
             return client.execute(this.request, this.responseType, DEFAULT_RESPONSE_CONVERTER);
         }
+
         public RequestBuilder<T> addHeader(String name, String value) {
             this.request.setHeader(name, value);
             return this;

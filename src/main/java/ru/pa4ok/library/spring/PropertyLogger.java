@@ -14,8 +14,8 @@ import org.springframework.core.env.MutablePropertySources;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PropertyLogger  {
-
+public class PropertyLogger
+{
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyLogger.class);
 
     @EventListener
